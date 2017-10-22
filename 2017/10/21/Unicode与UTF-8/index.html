@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://yoursite.com/child/2017/10/21/Unicode与UTF-8/index.html">
 <meta property="og:site_name" content="张磊-博客">
 <meta property="og:description" content="简单来说，Unicode：是ISO组织提出的UCS（Universal Multiple-Octet Coded Character Set），为所有字母和符号编码的字符集，即为每一个字符分配一个唯一的“ID”（学名码位，Code point）；UTF-8：为解决Unicode在网络上传输的问题，面向传输的众多UTF（UCS Transfer Format）标准出现了，它是一种编码规则，每次传输8">
-<meta property="og:updated_time" content="2017-10-21T11:32:19.724Z">
+<meta property="og:updated_time" content="2017-10-22T10:42:40.056Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Unicode与UTF-8">
 <meta name="twitter:description" content="简单来说，Unicode：是ISO组织提出的UCS（Universal Multiple-Octet Coded Character Set），为所有字母和符号编码的字符集，即为每一个字符分配一个唯一的“ID”（学名码位，Code point）；UTF-8：为解决Unicode在网络上传输的问题，面向传输的众多UTF（UCS Transfer Format）标准出现了，它是一种编码规则，每次传输8">
@@ -83,9 +83,9 @@
 		        
 					<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
 		        
-					<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
-		        
 					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/zhang-wu-ji-53-17/activities" title="zhihu"><i class="icon-zhihu"></i></a>
+		        
+					<a class="mail" target="_blank" href="/lei_buaa@outlook.com" title="mail"><i class="icon-mail"></i></a>
 		        
 			</div>
 		</nav>
@@ -122,9 +122,9 @@
 			        
 						<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
 			        
-						<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
-			        
 						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/zhang-wu-ji-53-17/activities" title="zhihu"><i class="icon-zhihu"></i></a>
+			        
+						<a class="mail" target="_blank" href="/lei_buaa@outlook.com" title="mail"><i class="icon-mail"></i></a>
 			        
 				</div>
 			</nav>
@@ -168,7 +168,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>简单来说，<br><strong>Unicode</strong>：是ISO组织提出的UCS（Universal Multiple-Octet Coded Character Set），为所有字母和符号编码的字符集，即为每一个字符分配一个唯一的“ID”（学名码位，Code point）；<br><strong>UTF-8</strong>：为解决Unicode在网络上传输的问题，面向传输的众多UTF（UCS Transfer Format）标准出现了，它是一种编码规则，每次传输8个位数据。</p>
+        <p>简单来说，<br><strong>Unicode</strong>：是ISO组织提出的UCS（Universal Multiple-Octet Coded Character Set），为所有字母和符号编码的字符集，即为每一个字符分配一个唯一的“ID”（学名码位，Code point）；<br><strong>UTF-8</strong>：为解决Unicode在网络上传输的问题，面向传输的众多UTF（UCS Transfer Format）标准出现了，它是一种编码规则，每次传输8个位数据。<a id="more"></a></p>
 <p>Unicode其实也是一种对ASCII编码（只包括英文字母、数字和一些字符）的扩展，如同GBK编码一般。Unicode采用两个字节，也就是16位来统一表示所有的字符。对于ASCII编码里的一个字节的“半角”字符，Unicode保持其编码不变，只是将长度由原来的8位扩展为16位（高8位添加0），因此这种方案在保存纯英文文本时会多浪费一倍的空间。</p>
 <p>UTF-8是为传输而设计的编码规则，它是一种变长的编码方式，使用1~4个字节来表示一个字符，根据不同的字符而变化字节长度。当字符在ASCII码的范围时，就用一个字节表示。Unicode中一个中文字符占2个字节，而UTF-8中一个中文字符占3个字节。Unicode到UTF-8不是直接的对应，需要一些算法和规则来转换。</p>
 <p>编码规则如下：</p>
