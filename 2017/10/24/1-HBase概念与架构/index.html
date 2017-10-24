@@ -6,14 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com/child">
-  <title>Tag: 基础知识点 | 张磊-博客</title>
+  <title>1 - HBase概念与架构 | 张磊-博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="张磊-博客">
-<meta property="og:url" content="http://yoursite.com/child/tags/基础知识点/index.html">
+  <meta name="description" content="HBase是一个典型的NoSQL（Not Only SQL）数据库，主要用于存储半结构化和非结构化的松散数据（因为在HBase中，为空的列是不占用存储空间的）。HBase的单表可以有百亿行，百万列，且其依靠横向扩展（增加服务器）来增加计算和存储能力，弹性扩展（可以在不停止现有服务的前提下，随时添加或者减少节点）。">
+<meta name="keywords" content="HBase">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1 - HBase概念与架构">
+<meta property="og:url" content="http://yoursite.com/child/2017/10/24/1-HBase概念与架构/index.html">
 <meta property="og:site_name" content="张磊-博客">
+<meta property="og:description" content="HBase是一个典型的NoSQL（Not Only SQL）数据库，主要用于存储半结构化和非结构化的松散数据（因为在HBase中，为空的列是不占用存储空间的）。HBase的单表可以有百亿行，百万列，且其依靠横向扩展（增加服务器）来增加计算和存储能力，弹性扩展（可以在不停止现有服务的前提下，随时添加或者减少节点）。">
+<meta property="og:image" content="http://oybpgm6jn.bkt.clouddn.com/image/hexoBlog/HBase%E6%9E%B6%E6%9E%84%E5%9B%BE.png">
+<meta property="og:updated_time" content="2017-10-24T11:24:40.459Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="张磊-博客">
+<meta name="twitter:title" content="1 - HBase概念与架构">
+<meta name="twitter:description" content="HBase是一个典型的NoSQL（Not Only SQL）数据库，主要用于存储半结构化和非结构化的松散数据（因为在HBase中，为空的列是不占用存储空间的）。HBase的单表可以有百亿行，百万列，且其依靠横向扩展（增加服务器）来增加计算和存储能力，弹性扩展（可以在不停止现有服务的前提下，随时添加或者减少节点）。">
+<meta name="twitter:image" content="http://oybpgm6jn.bkt.clouddn.com/image/hexoBlog/HBase%E6%9E%B6%E6%9E%84%E5%9B%BE.png">
   
     <link rel="alternative" href="/atom.xml" title="张磊-博客" type="application/atom+xml">
   
@@ -153,64 +160,190 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-1-HBase概念与架构" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/21/Unicode与UTF-8/" class="archive-article-date">
-  	<time datetime="2017-10-21T11:31:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-21</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/21/Unicode与UTF-8/">Unicode与UTF-8</a>
+    <h1 class="article-title" itemprop="name">
+      1 - HBase概念与架构
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/10/24/1-HBase概念与架构/" class="archive-article-date">
+  	<time datetime="2017-10-24T11:24:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>HBase是一个典型的NoSQL（Not Only SQL）数据库，主要用于存储半结构化和非结构化的松散数据（因为在HBase中，为空的列是不占用存储空间的）。HBase的单表可以有百亿行，百万列，且其依靠横向扩展（增加服务器）来增加计算和存储能力，弹性扩展（可以在不停止现有服务的前提下，随时添加或者减少节点）。<a id="more"></a></p>
+<p><img src="http://oybpgm6jn.bkt.clouddn.com/image/hexoBlog/HBase%E6%9E%B6%E6%9E%84%E5%9B%BE.png" alt="HBase架构图"></p>
+<p>Client：客户端，是HBase的入口，使用HBase的RPC机制与HMaster和HRegionServer进行通信。与HMaster进行通信，负责管理类的操作；与HRegionServer进行通信，负责数据读写类操作。</p>
+<p>ZooKeeper：分布式应用程序协调服务组件，负责管理多个HMaster的选举、存储HBase元数据信息（HMaster启动时将系统表-ROOT-加载到zk）、实时监控HRegionServer状态信息、存储所有Region的寻址入口等。</p>
+<p>HMaster：主节点，可以在启动HBase时设置为“启动多个”，但会通过选举机制保证只有一个用于提供服务。其主要负责管理Table的CRUD操作，管理RegionServer的负载均衡，Region的重分配及迁移等。</p>
+<p>HRegionServer：主要负责用户的I/O请求，向HDFS（Hadoop的分布式文件系统）中读写数据（HBase底层数据存储依靠于HDFS）。其包含一个HLog（实现Write ahead log，用户每次写入操作前，会写一份数据到HLog文件种）和多个HRegion。当前，每个HRegionServer可以管理大约100~1000个HRegion，每个HRegion大小为1~20GB。</p>
+<p>HRegion：存储的是实际数据，由一个或者多个HStore组成。</p>
+<p>HStore：每个HStore对应了Table中的一个ColumnFamily（列族，即将经常同时访问的字段放在一起）的存储。每个HStore包含了一个MemStore和至少一个StoreFile。MemStore是Sorted Memory Buffer，用户写入数据时会首先放入MemStore中，当它满了以后，会缓冲（flush）成一个StoreFile。</p>
+<p>StoreFile：包含一个或者多个HFile，存在着Compact（合并）与Split（分裂）操作。</p>
+<p>HFile：结构分为6部分，但重点是关注数据块（默认大小是64KB）和数据索引块。</p>
+<p>1)、HBase是一种列式存储的分布式数据库。为什么叫列式存储？</p>
+<p>2)、HBase是无模式的数据库。与传统定义模式的RDBMS数据库有什么区别？</p>
+<p>1、传统的行式数据库按行读取，在没有建立索引的情况下，每次获取一行或者多行的数据时，即使选择只涉及某几列，也会读取所有列数据。但是，如果处理查询时需要用到大部分的数据列，像OLTP（OnlineTransaction Processing，联机事务处理），如银行交易等，适合采用这种方式。<br>而OLAP（Online Analytical Processing，联机分析处理），如统计报表等，涉及大量查询或批量DML操作（几百万甚至几十亿个数据行），且操作往往只关心少数几个数据列时，列式数据库将会发挥作用，效率要好于行数据库。列式数据库通过将同一个数据列的各个值存放在一起，使得在查询少数几个字段时，能大大减少读取的数据量。<br>HBase是一种列式数据库，物理存储上，HBase的表是按列分开存储的。且为了提高读取效率，可以在HBase中将多个经常访问的数据列的值存放在一起，形成一个列族（Column Family）。一个列族的数据存放在一个或多个HFile中，且一个列族的数据会被同一个Region管理。</p>
+<p>2、HBase的模式结构包括表、RowKey（行键），ColumnFamily（列族）、Qualifier（列），TimeStamp（时间版本）。在表确定的情况下，&lt;行键&gt;可以确定一行数据，&lt;行键、列族、列&gt;三个维度可以确定一个单元格数据，加上时间版本，则可以确定某一个具体的数据。<br>HBase是无模式数据库，因为其在创建表时不需要像传统的关系型数据库那样，要提前定义好列名、类型等元数据，只需要提前定义列族（至少指定一个列族）。后期写入数据时，可随时增加列，当然也可以增加列族。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/ali-receive.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wechat-receive.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">基础知识点</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">编码</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">HBase</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/child/2017/10/24/1-HBase概念与架构/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/10/24/并发与并行/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">并发与并行</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -233,9 +366,9 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
