@@ -6,21 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com/child">
-  <title>1 - HBase概念与架构 | 张磊-博客</title>
+  <title>Java字节流与字符流 | 张磊-博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="HBase是一个典型的NoSQL（Not Only SQL）数据库，主要用于存储半结构化和非结构化的松散数据（因为在HBase中，为空的列是不占用存储空间的）。HBase的单表可以有百亿行，百万列，且其依靠横向扩展（增加服务器）来增加计算和存储能力，弹性扩展（可以在不停止现有服务的前提下，随时添加或者减少节点）。">
-<meta name="keywords" content="HBase">
+  <meta name="description" content="先上结论：一切都是字节流！ 在Unicode与UTF-8这篇博文里，我提到了Unicode是所有字符编码的集合，UTF-8是一种编码规则，其实本质上都是用字节编码去表示字符。如“知”的Unicode编码是77E5，UTF-8编码是E79FA5。字符是根据编码集对字节流进行翻译得到的产物。 字节流处理的单元是1个字节，通常用来处理视频、音频、图片等二进制文件。最基本的两个字节流类是InputStre">
+<meta name="keywords" content="概念混淆">
 <meta property="og:type" content="article">
-<meta property="og:title" content="1 - HBase概念与架构">
-<meta property="og:url" content="http://yoursite.com/child/2017/10/24/1-HBase概念与架构/index.html">
+<meta property="og:title" content="Java字节流与字符流">
+<meta property="og:url" content="http://yoursite.com/child/2017/10/25/Java字节流与字符流/index.html">
 <meta property="og:site_name" content="张磊-博客">
-<meta property="og:description" content="HBase是一个典型的NoSQL（Not Only SQL）数据库，主要用于存储半结构化和非结构化的松散数据（因为在HBase中，为空的列是不占用存储空间的）。HBase的单表可以有百亿行，百万列，且其依靠横向扩展（增加服务器）来增加计算和存储能力，弹性扩展（可以在不停止现有服务的前提下，随时添加或者减少节点）。">
-<meta property="og:image" content="http://oybpgm6jn.bkt.clouddn.com/image/hexoBlog/HBase%E6%9E%B6%E6%9E%84%E5%9B%BE.png">
-<meta property="og:updated_time" content="2017-10-25T09:05:50.934Z">
+<meta property="og:description" content="先上结论：一切都是字节流！ 在Unicode与UTF-8这篇博文里，我提到了Unicode是所有字符编码的集合，UTF-8是一种编码规则，其实本质上都是用字节编码去表示字符。如“知”的Unicode编码是77E5，UTF-8编码是E79FA5。字符是根据编码集对字节流进行翻译得到的产物。 字节流处理的单元是1个字节，通常用来处理视频、音频、图片等二进制文件。最基本的两个字节流类是InputStre">
+<meta property="og:image" content="http://oybpgm6jn.bkt.clouddn.com/Java%20IO%E6%93%8D%E4%BD%9C%E7%B1%BB.jpg">
+<meta property="og:updated_time" content="2017-10-25T10:39:52.239Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="1 - HBase概念与架构">
-<meta name="twitter:description" content="HBase是一个典型的NoSQL（Not Only SQL）数据库，主要用于存储半结构化和非结构化的松散数据（因为在HBase中，为空的列是不占用存储空间的）。HBase的单表可以有百亿行，百万列，且其依靠横向扩展（增加服务器）来增加计算和存储能力，弹性扩展（可以在不停止现有服务的前提下，随时添加或者减少节点）。">
-<meta name="twitter:image" content="http://oybpgm6jn.bkt.clouddn.com/image/hexoBlog/HBase%E6%9E%B6%E6%9E%84%E5%9B%BE.png">
+<meta name="twitter:title" content="Java字节流与字符流">
+<meta name="twitter:description" content="先上结论：一切都是字节流！ 在Unicode与UTF-8这篇博文里，我提到了Unicode是所有字符编码的集合，UTF-8是一种编码规则，其实本质上都是用字节编码去表示字符。如“知”的Unicode编码是77E5，UTF-8编码是E79FA5。字符是根据编码集对字节流进行翻译得到的产物。 字节流处理的单元是1个字节，通常用来处理视频、音频、图片等二进制文件。最基本的两个字节流类是InputStre">
+<meta name="twitter:image" content="http://oybpgm6jn.bkt.clouddn.com/Java%20IO%E6%93%8D%E4%BD%9C%E7%B1%BB.jpg">
   
     <link rel="alternative" href="/atom.xml" title="张磊-博客" type="application/atom+xml">
   
@@ -160,40 +160,34 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-1-HBase概念与架构" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Java字节流与字符流" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      1 - HBase概念与架构
+      Java字节流与字符流
     </h1>
   
 
         
-        <a href="/2017/10/24/1-HBase概念与架构/" class="archive-article-date">
-  	<time datetime="2017-10-24T11:24:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-24</time>
+        <a href="/2017/10/25/Java字节流与字符流/" class="archive-article-date">
+  	<time datetime="2017-10-25T09:15:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-25</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>HBase是一个典型的NoSQL（Not Only SQL）数据库，主要用于存储半结构化和非结构化的松散数据（因为在HBase中，为空的列是不占用存储空间的）。HBase的单表可以有百亿行，百万列，且其依靠横向扩展（增加服务器）来增加计算和存储能力，弹性扩展（可以在不停止现有服务的前提下，随时添加或者减少节点）。<a id="more"></a></p>
-<p><img src="http://oybpgm6jn.bkt.clouddn.com/image/hexoBlog/HBase%E6%9E%B6%E6%9E%84%E5%9B%BE.png" alt="HBase架构图"></p>
-<p>Client：客户端，是HBase的入口，使用HBase的RPC机制与HMaster和HRegionServer进行通信。与HMaster进行通信，负责管理类的操作；与HRegionServer进行通信，负责数据读写类操作。</p>
-<p>ZooKeeper：分布式应用程序协调服务组件，负责管理多个HMaster的选举、存储HBase元数据信息（HMaster启动时将系统表-ROOT-加载到zk）、实时监控HRegionServer状态信息、存储所有Region的寻址入口等。</p>
-<p>HMaster：主节点，可以在启动HBase时设置为“启动多个”，但会通过选举机制保证只有一个用于提供服务。其主要负责管理Table的CRUD操作，管理RegionServer的负载均衡，Region的重分配及迁移等。</p>
-<p>HRegionServer：主要负责用户的I/O请求，向HDFS（Hadoop的分布式文件系统）中读写数据（HBase底层数据存储依靠于HDFS）。其包含一个HLog（实现Write ahead log，用户每次写入操作前，会写一份数据到HLog文件中）和多个HRegion。当前，每个HRegionServer可以管理大约100~1000个HRegion，每个HRegion大小为1~20GB。</p>
-<p>HRegion：存储的是实际数据，由一个或者多个HStore组成。</p>
-<p>HStore：每个HStore对应了Table中的一个ColumnFamily（列族，即将经常同时访问的字段放在一起）的存储。每个HStore包含了一个MemStore和至少一个StoreFile。MemStore是Sorted Memory Buffer，用户写入数据时会首先放入MemStore中，当它满了以后，会缓冲（flush）成一个StoreFile。</p>
-<p>StoreFile：包含一个或者多个HFile，存在着Compact（合并）与Split（分裂）操作。</p>
-<p>HFile：结构分为6部分，但重点是关注数据块（默认大小是64KB）和数据索引块。</p>
-<p>1)、HBase是一种列式存储的分布式数据库。为什么叫列式存储？</p>
-<p>2)、HBase是无模式的数据库。与传统定义模式的RDBMS数据库有什么区别？</p>
-<p>1、传统的行式数据库按行读取，在没有建立索引的情况下，每次获取一行或者多行的数据时，即使选择只涉及某几列，也会读取所有列数据。但是，如果处理查询时需要用到大部分的数据列，像OLTP（OnlineTransaction Processing，联机事务处理），如银行交易等，适合采用这种方式。<br>而OLAP（Online Analytical Processing，联机分析处理），如统计报表等，涉及大量查询或批量DML操作（几百万甚至几十亿个数据行），且操作往往只关心少数几个数据列时，列式数据库将会发挥作用，效率要好于行数据库。列式数据库通过将同一个数据列的各个值存放在一起，使得在查询少数几个字段时，能大大减少读取的数据量。<br>HBase是一种列式数据库，物理存储上，HBase的表是按列分开存储的。且为了提高读取效率，可以在HBase中将多个经常访问的数据列的值存放在一起，形成一个列族（Column Family）。一个列族的数据存放在一个或多个HFile中，且一个列族的数据会被同一个Region管理。</p>
-<p>2、HBase的模式结构包括表、RowKey（行键），ColumnFamily（列族）、Qualifier（列），TimeStamp（时间版本）。在表确定的情况下，&lt;行键&gt;可以确定一行数据，&lt;行键、列族、列&gt;三个维度可以确定一个单元格数据，加上时间版本，则可以确定某一个具体的数据。<br>HBase是无模式数据库，因为其在创建表时不需要像传统的关系型数据库那样，要提前定义好列名、类型等元数据，只需要提前定义列族（至少指定一个列族）。后期写入数据时，可随时增加列，当然也可以增加列族。</p>
+        <p>先上结论：<strong>一切都是字节流</strong>！</p>
+<p>在<a href="http://buaazl.top/2017/10/21/Unicode%E4%B8%8EUTF-8/" target="_blank" rel="external">Unicode与UTF-8</a>这篇博文里，我提到了Unicode是所有字符编码的集合，UTF-8是一种编码规则，其实本质上都是用<strong>字节编码</strong>去表示<strong>字符</strong>。如“知”的Unicode编码是77E5，UTF-8编码是E79FA5。<strong>字符是根据编码集对字节流进行翻译得到的产物。</strong></p>
+<p>字节流处理的单元是<strong>1个字节</strong>，通常用来处理视频、音频、图片等<strong>二进制</strong>文件。最基本的两个字节流类是InputStream和OutputStream，分别为输入流和输出流。其中，InputStream类定义了从字节流中读取字节的方法<strong>read()</strong>,OutputStream类定义了写入字节的方法<strong>write()</strong>。</p>
+<hr>
+<p>【之前一直弄不清输入流与输出流的区别，举个例子：将文本文件的内容显示到屏幕上，需要建立输入流or输出流？】<br>答：输入流。可能会有人想，把文件读出来显示，不就是把文件内容输出嘛？但是“输入/输出流”是针对内存（包括内存缓冲）而言的。打印文件内容，对内存来说，需要做的是将文件内容读出来（对应InputStream的read()）输入到内存中，然后打印输出，因此需要建立“输入流”。</p>
+<hr>
+<p>字符流处理的单元是<strong>2个字节</strong>的Unicode字符，通常用来处理<strong>文本文件</strong>。输入字符流，需要把读取的字节序列从其对应的编码方式（如UTF-8）解码为Unicode码元序列，存入内存中。【收到字符的字节序列后，去掉UTf-8的包头，然后拼成Unicode码元】。</p>
+<p>最后上一张Java中IO操作的类继承图。<br><img src="http://oybpgm6jn.bkt.clouddn.com/Java%20IO%E6%93%8D%E4%BD%9C%E7%B1%BB.jpg" alt="Java IO操作类"></p>
 
       
 
@@ -238,7 +232,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">HBase</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">概念混淆</a>
         		</li>
       		
 		</ul>
@@ -294,7 +288,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/child/2017/10/24/1-HBase概念与架构/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/child/2017/10/25/Java字节流与字符流/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -308,18 +302,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2017/10/25/Java字节流与字符流/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Java字节流与字符流
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/10/24/并发与并行/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">并发与并行</div>
+    <a href="/2017/10/24/1-HBase概念与架构/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">1 - HBase概念与架构</div>
       <i class="icon-circle-right"></i>
     </a>
   
