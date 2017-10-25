@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="张磊-博客">
 <meta property="og:description" content="HBase是一个典型的NoSQL（Not Only SQL）数据库，主要用于存储半结构化和非结构化的松散数据（因为在HBase中，为空的列是不占用存储空间的）。HBase的单表可以有百亿行，百万列，且其依靠横向扩展（增加服务器）来增加计算和存储能力，弹性扩展（可以在不停止现有服务的前提下，随时添加或者减少节点）。">
 <meta property="og:image" content="http://oybpgm6jn.bkt.clouddn.com/image/hexoBlog/HBase%E6%9E%B6%E6%9E%84%E5%9B%BE.png">
-<meta property="og:updated_time" content="2017-10-24T11:24:40.459Z">
+<meta property="og:updated_time" content="2017-10-25T09:05:50.934Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="1 - HBase概念与架构">
 <meta name="twitter:description" content="HBase是一个典型的NoSQL（Not Only SQL）数据库，主要用于存储半结构化和非结构化的松散数据（因为在HBase中，为空的列是不占用存储空间的）。HBase的单表可以有百亿行，百万列，且其依靠横向扩展（增加服务器）来增加计算和存储能力，弹性扩展（可以在不停止现有服务的前提下，随时添加或者减少节点）。">
@@ -185,7 +185,7 @@ var _hmt = _hmt || [];
 <p>Client：客户端，是HBase的入口，使用HBase的RPC机制与HMaster和HRegionServer进行通信。与HMaster进行通信，负责管理类的操作；与HRegionServer进行通信，负责数据读写类操作。</p>
 <p>ZooKeeper：分布式应用程序协调服务组件，负责管理多个HMaster的选举、存储HBase元数据信息（HMaster启动时将系统表-ROOT-加载到zk）、实时监控HRegionServer状态信息、存储所有Region的寻址入口等。</p>
 <p>HMaster：主节点，可以在启动HBase时设置为“启动多个”，但会通过选举机制保证只有一个用于提供服务。其主要负责管理Table的CRUD操作，管理RegionServer的负载均衡，Region的重分配及迁移等。</p>
-<p>HRegionServer：主要负责用户的I/O请求，向HDFS（Hadoop的分布式文件系统）中读写数据（HBase底层数据存储依靠于HDFS）。其包含一个HLog（实现Write ahead log，用户每次写入操作前，会写一份数据到HLog文件种）和多个HRegion。当前，每个HRegionServer可以管理大约100~1000个HRegion，每个HRegion大小为1~20GB。</p>
+<p>HRegionServer：主要负责用户的I/O请求，向HDFS（Hadoop的分布式文件系统）中读写数据（HBase底层数据存储依靠于HDFS）。其包含一个HLog（实现Write ahead log，用户每次写入操作前，会写一份数据到HLog文件中）和多个HRegion。当前，每个HRegionServer可以管理大约100~1000个HRegion，每个HRegion大小为1~20GB。</p>
 <p>HRegion：存储的是实际数据，由一个或者多个HStore组成。</p>
 <p>HStore：每个HStore对应了Table中的一个ColumnFamily（列族，即将经常同时访问的字段放在一起）的存储。每个HStore包含了一个MemStore和至少一个StoreFile。MemStore是Sorted Memory Buffer，用户写入数据时会首先放入MemStore中，当它满了以后，会缓冲（flush）成一个StoreFile。</p>
 <p>StoreFile：包含一个或者多个HFile，存在着Compact（合并）与Split（分裂）操作。</p>
@@ -436,19 +436,15 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">概念混淆</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">HBase</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">基础知识点</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">编码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">概念混淆</a>
+                <a href="javascript:void(0)" class="js-tag color5">编程基础</a>
               </li>
             
             <div class="clearfix"></div>
