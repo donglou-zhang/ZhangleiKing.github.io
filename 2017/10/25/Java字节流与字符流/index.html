@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="张磊-博客">
 <meta property="og:description" content="先上结论：一切都是字节流！ 在Unicode与UTF-8这篇博文里，我提到了Unicode是所有字符编码的集合，UTF-8是一种编码规则，其实本质上都是用字节编码去表示字符。如“知”的Unicode编码是77E5，UTF-8编码是E79FA5。字符是根据编码集对字节流进行翻译得到的产物。">
 <meta property="og:image" content="http://oybpgm6jn.bkt.clouddn.com/Java%20IO%E6%93%8D%E4%BD%9C%E7%B1%BB.jpg">
-<meta property="og:updated_time" content="2017-10-25T10:41:20.149Z">
+<meta property="og:updated_time" content="2017-10-26T08:00:01.505Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java字节流与字符流">
 <meta name="twitter:description" content="先上结论：一切都是字节流！ 在Unicode与UTF-8这篇博文里，我提到了Unicode是所有字符编码的集合，UTF-8是一种编码规则，其实本质上都是用字节编码去表示字符。如“知”的Unicode编码是77E5，UTF-8编码是E79FA5。字符是根据编码集对字节流进行翻译得到的产物。">
@@ -181,7 +181,7 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <p>先上结论：<strong>一切都是字节流</strong>！</p>
-<p>在<a href="http://buaazl.top/2017/10/21/Unicode%E4%B8%8EUTF-8/" target="_blank" rel="external">Unicode与UTF-8</a>这篇博文里，我提到了Unicode是所有字符编码的集合，UTF-8是一种编码规则，其实本质上都是用<strong>字节编码</strong>去表示<strong>字符</strong>。如“知”的Unicode编码是77E5，UTF-8编码是E79FA5。<strong>字符是根据编码集对字节流进行翻译得到的产物。</strong><br><a id="more"></a></p>
+<p>在<a href="http://buaazl.top/2017/10/21/Unicode%E4%B8%8EUTF-8/" target="_blank" rel="external">Unicode与UTF-8</a>这篇博文里，我提到了Unicode是所有字符编码的集合，UTF-8是一种编码规则，其实本质上都是用<strong>字节编码</strong>去表示<strong>字符</strong>。如“知”的Unicode编码是77E5，UTF-8编码是E79FA5。<strong>字符是根据编码集对字节流进行翻译得到的产物。</strong><a id="more"></a></p>
 <p>字节流处理的单元是<strong>1个字节</strong>，通常用来处理视频、音频、图片等<strong>二进制</strong>文件。最基本的两个字节流类是InputStream和OutputStream，分别为输入流和输出流。其中，InputStream类定义了从字节流中读取字节的方法<strong>read()</strong>,OutputStream类定义了写入字节的方法<strong>write()</strong>。</p>
 <hr>
 <p>【之前一直弄不清输入流与输出流的区别，举个例子：将文本文件的内容显示到屏幕上，需要建立输入流or输出流？】<br>答：输入流。可能会有人想，把文件读出来显示，不就是把文件内容输出嘛？但是“输入/输出流”是针对内存（包括内存缓冲）而言的。打印文件内容，对内存来说，需要做的是将文件内容读出来（对应InputStream的read()）输入到内存中，然后打印输出，因此需要建立“输入流”。</p>
