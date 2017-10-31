@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="张磊-博客">
 <meta property="og:description" content="Get-单行数据获取 使用这种方法用于从hbase中获取单行数据： 　　 Result get(Get get) throws IOException 首先我们来看下Result的结构， 　　 Result {    Cell[] cells;    Boolean exist;//if the query was just to check existence    ... } Result用于">
 <meta property="og:image" content="http://oybpgm6jn.bkt.clouddn.com/image/hexoBlog/HBase%20Table%E7%BB%93%E6%9E%84%E5%9B%BE.jpg">
-<meta property="og:updated_time" content="2017-10-31T13:46:23.092Z">
+<meta property="og:updated_time" content="2017-10-31T13:48:39.785Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HBase源码分析-数据查询与Get">
 <meta name="twitter:description" content="Get-单行数据获取 使用这种方法用于从hbase中获取单行数据： 　　 Result get(Get get) throws IOException 首先我们来看下Result的结构， 　　 Result {    Cell[] cells;    Boolean exist;//if the query was just to check existence    ... } Result用于">
@@ -191,7 +191,7 @@ var _hmt = _hmt || [];
    Boolean exist;//if the query was just to check existence
    ...
 }
-</code></pre><p>Result用于存储Get或者Scan操作后返回的表的单行值，使用Result可以直接获取值或者各种Map结构（Key-Value对），例如：</p>
+</code></pre><p>Result用于存储Get或者Scan操作后返回的表的单行值，使用Result可以直接获取值或者各种Map结构（Key-Value对），<a id="more"></a>例如：</p>
 <pre><code>/**
 * Method for retrieving(检索) the row key that corresponds to
 * the row from which this Result was created.
@@ -479,19 +479,19 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">HBase</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">概念混淆</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">HBase - HBase源码分析</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">HBase</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">编程基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">概念混淆</a>
               </li>
             
             <div class="clearfix"></div>
