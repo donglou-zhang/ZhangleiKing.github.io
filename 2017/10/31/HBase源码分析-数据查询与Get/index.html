@@ -9,14 +9,14 @@
   <title>HBase源码分析-数据查询与Get | 张磊-博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Get-单行数据获取 使用这种方法用于从hbase中获取单行数据： 　　 Result get(Get get) throws IOException 首先我们来看下Result的结构， 　　 Result {    Cell[] cells;    Boolean exist;//if the query was just to check existence    ... } Result用于">
-<meta name="keywords" content="HBase源码分析">
+<meta name="keywords" content="HBase - HBase源码分析">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HBase源码分析-数据查询与Get">
 <meta property="og:url" content="http://yoursite.com/child/2017/10/31/HBase源码分析-数据查询与Get/index.html">
 <meta property="og:site_name" content="张磊-博客">
 <meta property="og:description" content="Get-单行数据获取 使用这种方法用于从hbase中获取单行数据： 　　 Result get(Get get) throws IOException 首先我们来看下Result的结构， 　　 Result {    Cell[] cells;    Boolean exist;//if the query was just to check existence    ... } Result用于">
 <meta property="og:image" content="http://oybpgm6jn.bkt.clouddn.com/image/hexoBlog/HBase%20Table%E7%BB%93%E6%9E%84%E5%9B%BE.jpg">
-<meta property="og:updated_time" content="2017-10-31T13:43:49.352Z">
+<meta property="og:updated_time" content="2017-10-31T13:47:03.652Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HBase源码分析-数据查询与Get">
 <meta name="twitter:description" content="Get-单行数据获取 使用这种方法用于从hbase中获取单行数据： 　　 Result get(Get get) throws IOException 首先我们来看下Result的结构， 　　 Result {    Cell[] cells;    Boolean exist;//if the query was just to check existence    ... } Result用于">
@@ -281,7 +281,7 @@ System.out.println(&quot;value: &quot; + val);
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">HBase源码分析</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">HBase - HBase源码分析</a>
         		</li>
       		
 		</ul>
@@ -350,6 +350,15 @@ System.out.println(&quot;value: &quot; + val);
 
   
 <nav id="article-nav">
+  
+    <a href="/2017/10/31/1-HBase源码分析-数据查询与Get/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          HBase源码分析-数据查询与Get
+        
+      </div>
+    </a>
   
   
     <a href="/2017/10/25/Java字节流与字符流/" id="article-nav-older" class="article-nav-link-wrap">
@@ -479,11 +488,7 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">编程基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HBase源码分析</a>
+                <a href="javascript:void(0)" class="js-tag color1">HBase</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -491,7 +496,11 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">HBase</a>
+                <a href="javascript:void(0)" class="js-tag color3">HBase - HBase源码分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">编程基础</a>
               </li>
             
             <div class="clearfix"></div>
