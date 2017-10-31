@@ -6,11 +6,11 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com/child">
-  <title>张磊-博客</title>
+  <title>Tag: HBase源码分析 | 张磊-博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="张磊-博客">
-<meta property="og:url" content="http://yoursite.com/child/index.html">
+<meta property="og:url" content="http://yoursite.com/child/tags/HBase源码分析/index.html">
 <meta property="og:site_name" content="张磊-博客">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="张磊-博客">
@@ -155,91 +155,34 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-HBase源码分析-数据查询与Get" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
     
-      <header class="article-header">
-        
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2017/10/31/HBase源码分析-数据查询与Get/" class="archive-article-date">
+  	<time datetime="2017-10-31T13:42:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-31</time>
+</a>
+        </div>
+    	 
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/31/HBase源码分析-数据查询与Get/">HBase源码分析-数据查询与Get</a>
+      <a class="archive-article-title" href="/2017/10/31/HBase源码分析-数据查询与Get/">HBase源码分析-数据查询与Get</a>
     </h1>
   
 
-        
-        <a href="/2017/10/31/HBase源码分析-数据查询与Get/" class="archive-article-date">
-  	<time datetime="2017-10-31T13:42:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Get-单行数据获取"><a href="#Get-单行数据获取" class="headerlink" title="Get-单行数据获取"></a>Get-单行数据获取</h1><hr>
-<p>使用这种方法用于从hbase中获取单行数据：
-　　</p>
-<pre><code>Result get(Get get) throws IOException
-</code></pre><p>首先我们来看下Result的结构，
-　　</p>
-<pre><code>Result {
-   Cell[] cells;
-   Boolean exist;//if the query was just to check existence
-   ...
-}
-</code></pre><p>Result用于存储Get或者Scan操作后返回的表的单行值，使用Result可以直接获取值或者各种Map结构（Key-Value对），例如：</p>
-<pre><code>/**
-* Method for retrieving(检索) the row key that corresponds to
-* the row from which this Result was created.
-**/
-public byte[] getRow(){
-    ...
-}
-
-/**
-* Map of qualifiers to values.
-* form: &lt;qualifier, value&gt;
-* 指定的列族内部的列与值的映射
-**/
-public NavigableMap&lt;byte[], byte[]&gt; getFamilyMap(byte [] family){
-    ...
-}
-</code></pre><p>接着，我们简单看下Result内部最重要的Cell数组。Cell是HBase中最基本的存储单元，包含很多的信息，比如：row、column family、type、mvcc version等。其唯一性由：坐标四元素&lt;行键、列族名、列限定符、时间戳&gt;+type 共计5者组合而定。前四者大家都清楚，<strong>type</strong>是指（写）操作类型，比如“put”，“delete”，读操作则没有。</p>
-<pre><code>interface Cell{
-    byte[] getRowArray();
-    int getRowOffset();
-    int getRowLength();
-    ...
-}
-</code></pre><p>另外几个不常见的信息，比如：<br><strong>mvcc version</strong>，多版本并发控制，其目的是在保证数据一致性的前提下，提供一种高并发的访问性能。<br><strong>tag</strong>，非必需的，可能一个cell中有很多tags。<br>放一张Table-Cell的基本结构图（图片来自网络）</p>
-<p><img src="http://oybpgm6jn.bkt.clouddn.com/image/hexoBlog/HBase%20Table%E7%BB%93%E6%9E%84%E5%9B%BE.jpg" alt="HBase Table结构图"></p>
-<p>单行获取数据时，每次RPC请求都会发送一个Get对象。因为Get对象初始化需要输入行键，因此可以理解为一个Get对象就代表一行数据，包含多个列族或者多个列的信息。</p>
-<pre><code>Get extends Query implements Row, Comparable&lt;Row&gt;{
-    /**
-    * create a Get operation for the specified row
-    * 如果没有其他操作设置，则默认为获取所有列数据的最新版本
-    **/
-    public Get(byte[] row) {...}
-}
-</code></pre><p>当然，用户可以有很多种方式来筛选目标数据，精确地获取某个单元格的数据：</p>
-<pre><code>Get addFamily(byte[] family);//取得指定列族的数据
-Get addColumn(byte[] column, byte[] qualifier);//取得指定那一列的数据
-...
-</code></pre><p>一个完整的单行数据获取过程：</p>
-<pre><code>Configuration conf = HBaseConfiguration.create();//参数配置
-HTable table = new HTable(conf, &quot;test&quot;);//初始化一个新的表引用
-Get get = new Get(Bytes.toBytes(&quot;row1&quot;));//使用指定行键“row1”构建一个Get实例
-get.addColumn(Bytes.toBytes(&quot;colfam1&quot;), Bytes.toBytes(&quot;qua1&quot;));//向Get实例中添加一个列的限定
-Result rst = table.get(get);//从HBase中返回数据
-byte[] val = result.getValue(Bytes.toBytes(&quot;colfam1&quot;), Bytes.toBytes(&quot;qua1&quot;));//从返回的结果中获取对应列的数据（默认获取最新版本）
-System.out.println(&quot;value: &quot; + val);
-</code></pre>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -251,348 +194,19 @@ System.out.println(&quot;value: &quot; + val);
 		</ul>
 	</div>
 
-      
+          
 
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/31/HBase源码分析-数据查询与Get/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
-    <article id="post-Java字节流与字符流" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
+    </div></section>
+  
+
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/25/Java字节流与字符流/">Java字节流与字符流</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/25/Java字节流与字符流/" class="archive-article-date">
-  	<time datetime="2017-10-25T09:15:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>先上结论：<strong>一切都是字节流</strong>！</p>
-<p>在<a href="http://buaazl.top/2017/10/21/Unicode%E4%B8%8EUTF-8/" target="_blank" rel="external">Unicode与UTF-8</a>这篇博文里，我提到了Unicode是所有字符编码的集合，UTF-8是一种编码规则，其实本质上都是用<strong>字节编码</strong>去表示<strong>字符</strong>。如“知”的Unicode编码是77E5，UTF-8编码是E79FA5。<strong>字符是根据编码集对字节流进行翻译得到的产物。</strong>
-        
-          <a class="article-more-a" href="/2017/10/25/Java字节流与字符流/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">概念混淆</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/25/Java字节流与字符流/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-1-HBase概念与架构" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/24/1-HBase概念与架构/">1 - HBase概念与架构</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/24/1-HBase概念与架构/" class="archive-article-date">
-  	<time datetime="2017-10-24T11:24:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>HBase是一个典型的NoSQL（Not Only SQL）数据库，主要用于存储半结构化和非结构化的松散数据（因为在HBase中，为空的列是不占用存储空间的）。HBase的单表可以有百亿行，百万列，且其依靠横向扩展（增加服务器）来增加计算和存储能力，弹性扩展（可以在不停止现有服务的前提下，随时添加或者减少节点）。
-        
-          <a class="article-more-a" href="/2017/10/24/1-HBase概念与架构/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">HBase</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/24/1-HBase概念与架构/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-并发与并行" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/24/并发与并行/">并发与并行</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/24/并发与并行/" class="archive-article-date">
-  	<time datetime="2017-10-24T00:58:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>并发是指两个或多个事件在<strong>同一时间间隔</strong>发生；并行是指两个或多个事件在<strong>同一时刻</strong>发生。</p>
-<p>并发是在<strong>同一实体</strong>（比如CPU的一个核）上的多个事件；并行是在<strong>不同实体</strong>（比如CPU的多个核）上的多个事件。</p>
-<p>并发的关键是有处理多个任务的能力，但不一定要同时；并行的关键是有同时处理多个任务的能力。
-        
-          <a class="article-more-a" href="/2017/10/24/并发与并行/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">概念混淆</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/24/并发与并行/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Unicode与UTF-8" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/21/Unicode与UTF-8/">Unicode与UTF-8</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/21/Unicode与UTF-8/" class="archive-article-date">
-  	<time datetime="2017-10-21T11:31:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>简单来说，<br><strong>Unicode</strong>：是ISO组织提出的UCS（Universal Multiple-Octet Coded Character Set），为所有字母和符号编码的字符集，即为每一个字符分配一个唯一的“ID”（学名码位，Code point）；<br><strong>UTF-8</strong>：为解决Unicode在网络上传输的问题，面向传输的众多UTF（UCS Transfer Format）标准出现了，它是一种编码规则，每次传输8个位数据。
-        
-          <a class="article-more-a" href="/2017/10/21/Unicode与UTF-8/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/21/Unicode与UTF-8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-  
 
 
           </div>
@@ -614,10 +228,10 @@ System.out.println(&quot;value: &quot; + val);
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
+		isHome: false,
 		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

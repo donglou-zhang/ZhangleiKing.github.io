@@ -6,14 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com/child">
-  <title>张磊-博客</title>
+  <title>HBase源码分析-数据查询与Get | 张磊-博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="张磊-博客">
-<meta property="og:url" content="http://yoursite.com/child/index.html">
+  <meta name="description" content="Get-单行数据获取 使用这种方法用于从hbase中获取单行数据： 　　 Result get(Get get) throws IOException 首先我们来看下Result的结构， 　　 Result {    Cell[] cells;    Boolean exist;//if the query was just to check existence    ... } Result用于">
+<meta name="keywords" content="HBase源码分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HBase源码分析-数据查询与Get">
+<meta property="og:url" content="http://yoursite.com/child/2017/10/31/HBase源码分析-数据查询与Get/index.html">
 <meta property="og:site_name" content="张磊-博客">
+<meta property="og:description" content="Get-单行数据获取 使用这种方法用于从hbase中获取单行数据： 　　 Result get(Get get) throws IOException 首先我们来看下Result的结构， 　　 Result {    Cell[] cells;    Boolean exist;//if the query was just to check existence    ... } Result用于">
+<meta property="og:image" content="http://oybpgm6jn.bkt.clouddn.com/image/hexoBlog/HBase%20Table%E7%BB%93%E6%9E%84%E5%9B%BE.jpg">
+<meta property="og:updated_time" content="2017-10-31T13:43:49.352Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="张磊-博客">
+<meta name="twitter:title" content="HBase源码分析-数据查询与Get">
+<meta name="twitter:description" content="Get-单行数据获取 使用这种方法用于从hbase中获取单行数据： 　　 Result get(Get get) throws IOException 首先我们来看下Result的结构， 　　 Result {    Cell[] cells;    Boolean exist;//if the query was just to check existence    ... } Result用于">
+<meta name="twitter:image" content="http://oybpgm6jn.bkt.clouddn.com/image/hexoBlog/HBase%20Table%E7%BB%93%E6%9E%84%E5%9B%BE.jpg">
   
     <link rel="alternative" href="/atom.xml" title="张磊-博客" type="application/atom+xml">
   
@@ -153,16 +160,14 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-HBase源码分析-数据查询与Get" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-HBase源码分析-数据查询与Get" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/31/HBase源码分析-数据查询与Get/">HBase源码分析-数据查询与Get</a>
+    <h1 class="article-title" itemprop="name">
+      HBase源码分析-数据查询与Get
     </h1>
   
 
@@ -236,6 +241,37 @@ System.out.println(&quot;value: &quot; + val);
       
 
       
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/ali-receive.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wechat-receive.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
     </div>
     <div class="article-info article-info-index">
       
@@ -254,16 +290,75 @@ System.out.println(&quot;value: &quot; + val);
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/31/HBase源码分析-数据查询与Get/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/child/2017/10/31/HBase源码分析-数据查询与Get/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2017/10/25/Java字节流与字符流/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java字节流与字符流</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -283,315 +378,14 @@ System.out.println(&quot;value: &quot; + val);
 
 
 
-
   
-    <article id="post-Java字节流与字符流" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/25/Java字节流与字符流/">Java字节流与字符流</a>
-    </h1>
   
 
-        
-        <a href="/2017/10/25/Java字节流与字符流/" class="archive-article-date">
-  	<time datetime="2017-10-25T09:15:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>先上结论：<strong>一切都是字节流</strong>！</p>
-<p>在<a href="http://buaazl.top/2017/10/21/Unicode%E4%B8%8EUTF-8/" target="_blank" rel="external">Unicode与UTF-8</a>这篇博文里，我提到了Unicode是所有字符编码的集合，UTF-8是一种编码规则，其实本质上都是用<strong>字节编码</strong>去表示<strong>字符</strong>。如“知”的Unicode编码是77E5，UTF-8编码是E79FA5。<strong>字符是根据编码集对字节流进行翻译得到的产物。</strong>
-        
-          <a class="article-more-a" href="/2017/10/25/Java字节流与字符流/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">概念混淆</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/25/Java字节流与字符流/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-1-HBase概念与架构" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/24/1-HBase概念与架构/">1 - HBase概念与架构</a>
-    </h1>
   
 
-        
-        <a href="/2017/10/24/1-HBase概念与架构/" class="archive-article-date">
-  	<time datetime="2017-10-24T11:24:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>HBase是一个典型的NoSQL（Not Only SQL）数据库，主要用于存储半结构化和非结构化的松散数据（因为在HBase中，为空的列是不占用存储空间的）。HBase的单表可以有百亿行，百万列，且其依靠横向扩展（增加服务器）来增加计算和存储能力，弹性扩展（可以在不停止现有服务的前提下，随时添加或者减少节点）。
-        
-          <a class="article-more-a" href="/2017/10/24/1-HBase概念与架构/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">HBase</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/24/1-HBase概念与架构/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-并发与并行" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/24/并发与并行/">并发与并行</a>
-    </h1>
   
 
-        
-        <a href="/2017/10/24/并发与并行/" class="archive-article-date">
-  	<time datetime="2017-10-24T00:58:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>并发是指两个或多个事件在<strong>同一时间间隔</strong>发生；并行是指两个或多个事件在<strong>同一时刻</strong>发生。</p>
-<p>并发是在<strong>同一实体</strong>（比如CPU的一个核）上的多个事件；并行是在<strong>不同实体</strong>（比如CPU的多个核）上的多个事件。</p>
-<p>并发的关键是有处理多个任务的能力，但不一定要同时；并行的关键是有同时处理多个任务的能力。
-        
-          <a class="article-more-a" href="/2017/10/24/并发与并行/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">概念混淆</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/24/并发与并行/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Unicode与UTF-8" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/21/Unicode与UTF-8/">Unicode与UTF-8</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/21/Unicode与UTF-8/" class="archive-article-date">
-  	<time datetime="2017-10-21T11:31:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>简单来说，<br><strong>Unicode</strong>：是ISO组织提出的UCS（Universal Multiple-Octet Coded Character Set），为所有字母和符号编码的字符集，即为每一个字符分配一个唯一的“ID”（学名码位，Code point）；<br><strong>UTF-8</strong>：为解决Unicode在网络上传输的问题，面向传输的众多UTF（UCS Transfer Format）标准出现了，它是一种编码规则，每次传输8个位数据。
-        
-          <a class="article-more-a" href="/2017/10/21/Unicode与UTF-8/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/21/Unicode与UTF-8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
 
 
@@ -614,8 +408,8 @@ System.out.println(&quot;value: &quot; + val);
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
