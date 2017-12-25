@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com/child">
   <title>分布式一致性 | 张磊-博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#分布式一致性 为了保证数据的高可用性，通常会在不同物理节点上保存多个副本。而为了保证对用户提供统一、正确的增删改查等语义，需要保证不同物理机器上的副本是一致的。 ##1. 分布式事务单个节点上的数据操作可以满足ACID，但是相互独立的节点无法知道对方的事务执行情况。如果要保证数据的一致性，就必须对数据写操作要求其能够实现：要么在全部节点执行，要么在全部节点都不执行。  分布式事务是指会涉及到多个">
+  <meta name="description" content="#分布式一致性 为了保证数据的高可用性，通常会在不同物理节点上保存多个副本。而为了保证对用户提供统一、正确的增删改查等语义，需要保证不同物理机器上的副本是一致的。 ##1. 分布式事务单个节点上的数据操作可以满足ACID，但是相互独立的节点无法知道对方的事务执行情况。如果要保证数据的一致性，就必须对数据写操作要求其能够实现：要么在全部节点执行，要么在全部节点都不执行。">
 <meta name="keywords" content="分布式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="分布式一致性">
 <meta property="og:url" content="http://yoursite.com/child/2017/12/25/分布式一致性/index.html">
 <meta property="og:site_name" content="张磊-博客">
-<meta property="og:description" content="#分布式一致性 为了保证数据的高可用性，通常会在不同物理节点上保存多个副本。而为了保证对用户提供统一、正确的增删改查等语义，需要保证不同物理机器上的副本是一致的。 ##1. 分布式事务单个节点上的数据操作可以满足ACID，但是相互独立的节点无法知道对方的事务执行情况。如果要保证数据的一致性，就必须对数据写操作要求其能够实现：要么在全部节点执行，要么在全部节点都不执行。  分布式事务是指会涉及到多个">
-<meta property="og:updated_time" content="2017-12-25T07:12:25.598Z">
+<meta property="og:description" content="#分布式一致性 为了保证数据的高可用性，通常会在不同物理节点上保存多个副本。而为了保证对用户提供统一、正确的增删改查等语义，需要保证不同物理机器上的副本是一致的。 ##1. 分布式事务单个节点上的数据操作可以满足ACID，但是相互独立的节点无法知道对方的事务执行情况。如果要保证数据的一致性，就必须对数据写操作要求其能够实现：要么在全部节点执行，要么在全部节点都不执行。">
+<meta property="og:updated_time" content="2017-12-25T07:15:33.619Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分布式一致性">
-<meta name="twitter:description" content="#分布式一致性 为了保证数据的高可用性，通常会在不同物理节点上保存多个副本。而为了保证对用户提供统一、正确的增删改查等语义，需要保证不同物理机器上的副本是一致的。 ##1. 分布式事务单个节点上的数据操作可以满足ACID，但是相互独立的节点无法知道对方的事务执行情况。如果要保证数据的一致性，就必须对数据写操作要求其能够实现：要么在全部节点执行，要么在全部节点都不执行。  分布式事务是指会涉及到多个">
+<meta name="twitter:description" content="#分布式一致性 为了保证数据的高可用性，通常会在不同物理节点上保存多个副本。而为了保证对用户提供统一、正确的增删改查等语义，需要保证不同物理机器上的副本是一致的。 ##1. 分布式事务单个节点上的数据操作可以满足ACID，但是相互独立的节点无法知道对方的事务执行情况。如果要保证数据的一致性，就必须对数据写操作要求其能够实现：要么在全部节点执行，要么在全部节点都不执行。">
   
     <link rel="alternative" href="/atom.xml" title="张磊-博客" type="application/atom+xml">
   
@@ -180,7 +180,7 @@ var _hmt = _hmt || [];
       
         <p>#分布式一致性</p>
 <p>为了保证数据的高可用性，通常会在不同物理节点上保存多个副本。而为了保证对用户提供统一、正确的增删改查等语义，需要保证不同物理机器上的副本是一致的。</p>
-<p>##1. 分布式事务<br>单个节点上的数据操作可以满足ACID，但是相互独立的节点无法知道对方的事务执行情况。如果要保证数据的一致性，就必须对数据写操作要求其能够实现：要么在全部节点执行，要么在全部节点都不执行。</p>
+<p>##1. 分布式事务<br>单个节点上的数据操作可以满足ACID，但是相互独立的节点无法知道对方的事务执行情况。如果要保证数据的一致性，就必须对数据写操作要求其能够实现：要么在全部节点执行，要么在全部节点都不执行。<a id="more"></a></p>
 <blockquote>
 <p>分布式事务是指会涉及到多个数据库的事务。这种情况下，一个数据库内部操作是否能提交成功，不仅取决于自身，还与全局中其他事务的成功与否相关。为了保证数据的一致性，要求事务产生统一的结果：即全部提交成功或者全部回滚。</p>
 </blockquote>
@@ -507,15 +507,15 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">概念混淆</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">编程基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
             
             <div class="clearfix"></div>
