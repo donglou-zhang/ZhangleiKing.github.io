@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com/child">
-  <title>并发与并行 | 张磊-博客</title>
+  <title>分布式一致性 | 张磊-博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="并发是指两个或多个事件在同一时间间隔发生；并行是指两个或多个事件在同一时刻发生。 并发是在同一实体（比如CPU的一个核）上的多个事件；并行是在不同实体（比如CPU的多个核）上的多个事件。 并发的关键是有处理多个任务的能力，但不一定要同时；并行的关键是有同时处理多个任务的能力。">
-<meta name="keywords" content="概念混淆">
+  <meta name="description" content="#分布式一致性 为了保证数据的高可用性，通常会在不同物理节点上保存多个副本。而为了保证对用户提供统一、正确的增删改查等语义，需要保证不同物理机器上的副本是一致的。 ##1. 分布式事务单个节点上的数据操作可以满足ACID，但是相互独立的节点无法知道对方的事务执行情况。如果要保证数据的一致性，就必须对数据写操作要求其能够实现：要么在全部节点执行，要么在全部节点都不执行。  分布式事务是指会涉及到多个">
+<meta name="keywords" content="分布式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="并发与并行">
-<meta property="og:url" content="http://yoursite.com/child/2017/10/24/并发与并行/index.html">
+<meta property="og:title" content="分布式一致性">
+<meta property="og:url" content="http://yoursite.com/child/2017/12/25/分布式一致性/index.html">
 <meta property="og:site_name" content="张磊-博客">
-<meta property="og:description" content="并发是指两个或多个事件在同一时间间隔发生；并行是指两个或多个事件在同一时刻发生。 并发是在同一实体（比如CPU的一个核）上的多个事件；并行是在不同实体（比如CPU的多个核）上的多个事件。 并发的关键是有处理多个任务的能力，但不一定要同时；并行的关键是有同时处理多个任务的能力。">
-<meta property="og:updated_time" content="2017-10-25T10:42:55.483Z">
+<meta property="og:description" content="#分布式一致性 为了保证数据的高可用性，通常会在不同物理节点上保存多个副本。而为了保证对用户提供统一、正确的增删改查等语义，需要保证不同物理机器上的副本是一致的。 ##1. 分布式事务单个节点上的数据操作可以满足ACID，但是相互独立的节点无法知道对方的事务执行情况。如果要保证数据的一致性，就必须对数据写操作要求其能够实现：要么在全部节点执行，要么在全部节点都不执行。  分布式事务是指会涉及到多个">
+<meta property="og:updated_time" content="2017-12-25T07:12:25.598Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="并发与并行">
-<meta name="twitter:description" content="并发是指两个或多个事件在同一时间间隔发生；并行是指两个或多个事件在同一时刻发生。 并发是在同一实体（比如CPU的一个核）上的多个事件；并行是在不同实体（比如CPU的多个核）上的多个事件。 并发的关键是有处理多个任务的能力，但不一定要同时；并行的关键是有同时处理多个任务的能力。">
+<meta name="twitter:title" content="分布式一致性">
+<meta name="twitter:description" content="#分布式一致性 为了保证数据的高可用性，通常会在不同物理节点上保存多个副本。而为了保证对用户提供统一、正确的增删改查等语义，需要保证不同物理机器上的副本是一致的。 ##1. 分布式事务单个节点上的数据操作可以满足ACID，但是相互独立的节点无法知道对方的事务执行情况。如果要保证数据的一致性，就必须对数据写操作要求其能够实现：要么在全部节点执行，要么在全部节点都不执行。  分布式事务是指会涉及到多个">
   
     <link rel="alternative" href="/atom.xml" title="张磊-博客" type="application/atom+xml">
   
@@ -158,31 +158,105 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-并发与并行" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-分布式一致性" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      并发与并行
+      分布式一致性
     </h1>
   
 
         
-        <a href="/2017/10/24/并发与并行/" class="archive-article-date">
-  	<time datetime="2017-10-24T00:58:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-24</time>
+        <a href="/2017/12/25/分布式一致性/" class="archive-article-date">
+  	<time datetime="2017-12-25T07:12:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-25</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>并发是指两个或多个事件在<strong>同一时间间隔</strong>发生；并行是指两个或多个事件在<strong>同一时刻</strong>发生。</p>
-<p>并发是在<strong>同一实体</strong>（比如CPU的一个核）上的多个事件；并行是在<strong>不同实体</strong>（比如CPU的多个核）上的多个事件。</p>
-<p>并发的关键是有处理多个任务的能力，但不一定要同时；并行的关键是有同时处理多个任务的能力。<a id="more"></a></p>
-<p>举个简单的例子，小明要练习书法，规定了每天下午1点到3点进行练习，且1点到2点练习硬笔书法，2点到3点练习软笔书法（并发）。但是为了提高练习效率，充分利用时间，小明决定同时练习硬笔和软笔，具体做法就是左手练习硬笔书法，右手练习软笔书法（并行）。小明真是天赋过人啊….（例子差强人意，意思体会了就行）</p>
-<p>尽管了解了并发和并行的区别，但有时候会混淆并发和并行分别对应的概念。于我而言，我记忆的方式为：将“并行”理解为“两个人并排一起走路”，对应到计算机领域，则可认为是“两个CPU内核在同时运行”。</p>
+        <p>#分布式一致性</p>
+<p>为了保证数据的高可用性，通常会在不同物理节点上保存多个副本。而为了保证对用户提供统一、正确的增删改查等语义，需要保证不同物理机器上的副本是一致的。</p>
+<p>##1. 分布式事务<br>单个节点上的数据操作可以满足ACID，但是相互独立的节点无法知道对方的事务执行情况。如果要保证数据的一致性，就必须对数据写操作要求其能够实现：要么在全部节点执行，要么在全部节点都不执行。</p>
+<blockquote>
+<p>分布式事务是指会涉及到多个数据库的事务。这种情况下，一个数据库内部操作是否能提交成功，不仅取决于自身，还与全局中其他事务的成功与否相关。为了保证数据的一致性，要求事务产生统一的结果：即全部提交成功或者全部回滚。</p>
+</blockquote>
+<p>##2. 两阶段提交协议（2PC）<br>对于分布式事务，如果直接提交请求，部分节点执行成功，部分节点失败，则会出现数据的不一致性。</p>
+<blockquote>
+<p>两阶段提交协议是为了保证分布式事务的数据一致性。为了能够协调并掌握各个节点（称为参与者）的事务执行情况，这里引入一个组件（协调者）。整个2PC分为：准备阶段和提交阶段，准备阶段用于“询问”各个参与者是否能够满足提交，提交阶段则为执行阶段（可能执行提交，也可能执行回滚）</p>
+</blockquote>
+<p>###2.1 准备阶段</p>
+<ul>
+<li>协调者向各个参与者发送请求，询问是否可以执行提交，并等待各个参与者的恢复；</li>
+<li>参与者收到协调者发来的询问请求后，执行事务操作（记录redo和undo），但注意此时还并未提交。如果事务操作成功，则参与者向协调者恢复“yes”，否则回复“no”；</li>
+<li>协调者接收到所有参与者的回复，当然也可能存在请求超时的情况。</li>
+</ul>
+<p>###2.2 提交阶段</p>
+<ul>
+<li>若所有的参与者都成功执行了事务，切协调者收集到了所有参与者回复的“yes”，则协调者向所有节点发送“commit”请求，要求所有参与者执行提交操作；只要有一个参与者执行失败或者请求超时，则协调者向所有参与者发送“roll back”请求，要去所有参与者执行回滚；</li>
+<li>所有的参与者执行【提交】或者【回滚并释放所有事务处理过程中占用的锁资源】。完成后，向协调者发送确认信息；协调者收到所有确认消息后，完成事务。</li>
+</ul>
+<p>###2.3 缺陷</p>
+<ol>
+<li>同步阻塞：事务提交过程中，所有参与节点都是阻塞的。这就意味着，当有其他第三方节点访问该节点的资源时，将会处于阻塞状态；</li>
+<li>单点故障：一旦协调者发生故障，则会导致参与者处于阻塞状态。例如，当协调者在提交阶段宕机了，参与者锁定事务资源并会一直等待协调者的请求，导致无法完成事务操作。尽管可以通过选举策略重新选择一个协调者，但是无法解决参与者阻塞的问题；</li>
+<li>数据不一致：由于协调者在发送commit过程中发生故障，或者因为脑裂（局部网络异常，网络分区）导致部分参与者无法接收commit请求，则会使得部分节点收到commit请求并执行，部分节点没收到commit，从而产生数据的不一致性。</li>
+</ol>
+<p>##3. 三阶段提交协议（3PC）<br>为了解决2PC中的部分问题，3PC做了一些改进，总体来说就是将2PC中的准备阶段一分为二：CanCommit阶段和PreCommit阶段。另外，3PC中还引入了参与者的超时机制。</p>
+<p>###3.1 CanCommit阶段</p>
+<blockquote>
+<p>a. 协调者向所有参与者发送CanCommit请求，询问是否可以执行事务提交，并等待所有参与者的回复；</p>
+<p>b. 参与者收到请求后，如果判断自身能够完成事务提交，则回复“yes”，否则回复“no”。</p>
+</blockquote>
+<p>###3.2 PreCommit阶段<br>根据CanCommit阶段的回复，PreCommit阶段有两种情况：<br>1、协调者收到所有参与者回复的“yes”</p>
+<blockquote>
+<p>a. 协调者向所有参与者发送PreCommit请求，并等待回复；</p>
+<p>b. 参与者收到请求后，执行具体的事务操作（记录undo和redo），此时事务还没有提交；</p>
+<p>c. 如果参与者中事务执行成功，则返回ACK确认操作，否则返回错误信息。</p>
+</blockquote>
+<p>2、协调者收到的回复中包含“no”或者请求超时</p>
+<blockquote>
+<p>a. 协调者向所有参与者发送abort请求；</p>
+<p>b. 参与者收到abort请求，或者参与者超时之后也未收到来自协调者的请求，则中断事务。</p>
+</blockquote>
+<p>###3.3 DoCommit阶段<br>根据PreCommit阶段的回复，DoCommit阶段也有两种情况：<br>1、协调者收到所有参与者的ACK回复</p>
+<blockquote>
+<p>a. 协调者向所有参与者发送DoCommit请求，并等待回复；</p>
+<p>b. 参与者收到请求后，执行事务的提交操作，执行完成后，向协调者发送ACK确认消息；</p>
+<p>c. 协调者收到所有来自参与者的ACK消息后，完成事务。</p>
+</blockquote>
+<p>2、协调者没有收到参与者的回复，即等待超时；或者协调者收到的消息不是ACK，而是错误消息</p>
+<blockquote>
+<p>a. 协调者向所有参与者发送abort请求；</p>
+<p>b. 参与者收到abort请求后，根据之前记录的undo和redo日志，执行事务回滚，并在回滚完成后，释放所有在事务中占用的锁资源；</p>
+<p>c. 参与者完成回滚及释放资源后，向协调者发送ACK消息；协调者收到所有参与者回复的消息后，中断事务。</p>
+</blockquote>
+<p>注意：如果参与者在超时等待后，既没有收到DoCommit，也没收到abort请求，则会选择继续进行事务提交。因为目前已经处于第三阶段了，有理由相信成功提交的几率更大。</p>
+<p>3PC解决了2PC中的单点故障问题，并减少了阻塞。因为参与者在超时等待后，会自动提交commit操作，而不是一直等待下去。但是3PC也无法解决数据不一致性，例如，当部分参与者收到了abort请求，而另一部分参与者由于网络通信原因没有收到abort请求，自动执行了commit，则会导致数据不一致。</p>
+<p>##3. Paxos算法<br>Paxos是一种基于消息传递的提高分布式系统容错性的一致性算法。</p>
+<p>背景：</p>
+<blockquote>
+<p>1、参与者（节点）可能会随时宕机或者出现网络分割的情况</p>
+<p>2、消息传递可能会出现延迟、重复、丢失等可能性，但是其不会被损坏、篡改（没有拜占庭将军的问题）</p>
+</blockquote>
+<p>目的：</p>
+<blockquote>
+<p>在分布式系统中，关于某个数据值达成一致，从而保证分布式系统的数据一致性。</p>
+</blockquote>
+<p>Paxos算法中存在三种角色：提案者（Proposer），接收者（Acceptor），学习者（Learner）。</p>
+<p>###3.1 Proposer生成提案</p>
+<blockquote>
+<p>Prepare请求：Proposer提出一个编号为M1的提案，发送给大多数Acceptor，等待回应；</p>
+</blockquote>
+<p>如果Acceptor从未批准过任何提案，则返回数据中关于提案可以为空；否则，返回其批准过的提案中编号最大的提案所对应的编号和Value值；</p>
+<blockquote>
+<p>Accept请求：Proposer接收到了来自半数以上的Acceptor的回复，则其可以生成编号为M1，值为V1的提案了。注意，值V1应该等于所有回复中编号最大的提案对应的value值。如果所有的回复中都无相关[编号，value]数据，则Proposer可自己提出所需要的数据，赋值给V1。</p>
+</blockquote>
+<p>###3.2 Acceptor接收提案<br>若Acceptor之前没有批准过任何提案，则可以批准刚接收的编号为M1的提案；否则，Acceptor不得批准编号小于之前已经批准的提案中最大的编号（例如，之前已经批准M11，M12，M13，M13编号最大，则接下来的提案中，如果编号小于M13，则不得批准）</p>
+<p>###3.3 Learner学习提案<br>一旦某个提案M0，V0被大多数Acceptor批准，则认为该提案被“选定”。对于已经被“选定”的提案，对于所有的Learner而言，其是可见的（即可被获取到的）</p>
 
       
 
@@ -227,7 +301,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">概念混淆</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分布式</a>
         		</li>
       		
 		</ul>
@@ -283,7 +357,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/child/2017/10/24/并发与并行/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/child/2017/12/25/分布式一致性/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -297,18 +371,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2017/10/24/A-HBase概念与架构/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          A - HBase概念与架构
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/10/21/Unicode与UTF-8/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Unicode与UTF-8</div>
+    <a href="/2017/10/31/1-HBase源码分析-数据查询与Get/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">1 - HBase源码分析-数据查询与Get</div>
       <i class="icon-circle-right"></i>
     </a>
   
