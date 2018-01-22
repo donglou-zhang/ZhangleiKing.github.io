@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com/child">
-  <title>Unicode与UTF-8 | 张磊-博客</title>
+  <title>1 - HBase源码分析-基本情况 | 张磊-博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="简单来说，Unicode：是ISO组织提出的UCS（Universal Multiple-Octet Coded Character Set），为所有字母和符号编码的字符集，即为每一个字符分配一个唯一的“ID”（学名码位，Code point）；UTF-8：为解决Unicode在网络上传输的问题，面向传输的众多UTF（UCS Transfer Format）标准出现了，它是一种编码规则，每次传输8">
-<meta name="keywords" content="编程基础">
+  <meta name="description" content="从本节起，将开启HBase的源码分析系列，分析的内容主要包括但不限于以下：">
+<meta name="keywords" content="HBase,Hbase源码分析系列">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Unicode与UTF-8">
-<meta property="og:url" content="http://yoursite.com/child/2017/10/21/Unicode与UTF-8/index.html">
+<meta property="og:title" content="1 - HBase源码分析-基本情况">
+<meta property="og:url" content="http://yoursite.com/child/2017/10/28/1-HBase源码分析-基本情况/index.html">
 <meta property="og:site_name" content="张磊-博客">
-<meta property="og:description" content="简单来说，Unicode：是ISO组织提出的UCS（Universal Multiple-Octet Coded Character Set），为所有字母和符号编码的字符集，即为每一个字符分配一个唯一的“ID”（学名码位，Code point）；UTF-8：为解决Unicode在网络上传输的问题，面向传输的众多UTF（UCS Transfer Format）标准出现了，它是一种编码规则，每次传输8">
-<meta property="og:updated_time" content="2017-10-25T09:06:34.216Z">
+<meta property="og:description" content="从本节起，将开启HBase的源码分析系列，分析的内容主要包括但不限于以下：">
+<meta property="og:updated_time" content="2018-01-22T14:54:50.525Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Unicode与UTF-8">
-<meta name="twitter:description" content="简单来说，Unicode：是ISO组织提出的UCS（Universal Multiple-Octet Coded Character Set），为所有字母和符号编码的字符集，即为每一个字符分配一个唯一的“ID”（学名码位，Code point）；UTF-8：为解决Unicode在网络上传输的问题，面向传输的众多UTF（UCS Transfer Format）标准出现了，它是一种编码规则，每次传输8">
+<meta name="twitter:title" content="1 - HBase源码分析-基本情况">
+<meta name="twitter:description" content="从本节起，将开启HBase的源码分析系列，分析的内容主要包括但不限于以下：">
   
     <link rel="alternative" href="/atom.xml" title="张磊-博客" type="application/atom+xml">
   
@@ -158,43 +158,31 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Unicode与UTF-8" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-1-HBase源码分析-基本情况" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Unicode与UTF-8
+      1 - HBase源码分析-基本情况
     </h1>
   
 
         
-        <a href="/2017/10/21/Unicode与UTF-8/" class="archive-article-date">
-  	<time datetime="2017-10-21T11:31:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-21</time>
+        <a href="/2017/10/28/1-HBase源码分析-基本情况/" class="archive-article-date">
+  	<time datetime="2017-10-28T03:21:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>简单来说，<br><strong>Unicode</strong>：是ISO组织提出的UCS（Universal Multiple-Octet Coded Character Set），为所有字母和符号编码的字符集，即为每一个字符分配一个唯一的“ID”（学名码位，Code point）；<br><strong>UTF-8</strong>：为解决Unicode在网络上传输的问题，面向传输的众多UTF（UCS Transfer Format）标准出现了，它是一种编码规则，每次传输8个位数据。<a id="more"></a></p>
-<p>Unicode其实也是一种对ASCII编码（只包括英文字母、数字和一些字符）的扩展，如同GBK编码一般。Unicode采用两个字节，也就是16位来统一表示所有的字符。对于ASCII编码里的一个字节的“半角”字符，Unicode保持其编码不变，只是将长度由原来的8位扩展为16位（高8位添加0），因此这种方案在保存纯英文文本时会多浪费一倍的空间。</p>
-<p>UTF-8是为传输而设计的编码规则，它是一种变长的编码方式，使用1~4个字节来表示一个字符，根据不同的字符而变化字节长度。当字符在ASCII码的范围时，就用一个字节表示。Unicode中一个中文字符占2个字节，而UTF-8中一个中文字符占3个字节。Unicode到UTF-8不是直接的对应，需要一些算法和规则来转换。</p>
-<p>编码规则如下：</p>
-<pre><code>Unicode                  UTF-8
-U+ 0000 ~ U+ 007F：    0xxxxxxx
-U+ 0080 ~ U+ 07FF：    110xxxxx 10xxxxxx
-U+ 0800 ~ U+ FFFF：    1110xxxx 10xxxxxx 10xxxxxx
-U+ 10000 ~ U+ 1FFFF：  11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
-</code></pre><p>例如：“知”的码位是U+77E5，那么它的UTF-8编码字节序列为？</p>
-<pre><code>    7     7     E     5
-    0111  0111  1110  0101
-    0111   011111   100101（二进制的77E5）
-1110xxxx 10xxxxxx 10xxxxxx（模板，第三行）
-11100111 10011111 10100101（带入模板）
-E   7    9   F    A   5
-</code></pre><p>故“知”的UTF-8的编码字节序列为：E79FA5(3个字节表示一个中文字符)</p>
+        <p>从本节起，将开启HBase的源码分析系列，分析的内容主要包括但不限于以下：<br><a id="more"></a></p>
+<blockquote>
+<p>查询数据流程<br>插入数据流程<br>扫描数据流程<br>删除数据流程Zookeeper启动过程<br>HMaster代码结构<br>HRegionServer代码结构<br>HMaster启动过程<br>RegionServer启动过程<br>HMaster与RegionServer通信过程<br>Compact/Split过程<br>LSM数据模型<br>HFile格式<br>HLog格式<br>WAL<br>Lock (RowLock)<br>Filter实例，作用范围<br>Filter集合，对应类<br>以及一些设计模式或者其他亮点</p>
+</blockquote>
+<p>分析的HBase源码为<a href="https://github.com/apache/hbase/" target="_blank" rel="external">github下载</a>，主要针对HBase client、server、common、protocol、replication等直接相关的代码进行分析，其他对第三方的集成支持的代码则先不考虑。</p>
 
       
 
@@ -239,7 +227,11 @@ E   7    9   F    A   5
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程基础</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">HBase</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hbase源码分析系列</a>
         		</li>
       		
 		</ul>
@@ -295,7 +287,7 @@ E   7    9   F    A   5
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/child/2017/10/21/Unicode与UTF-8/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/child/2017/10/28/1-HBase源码分析-基本情况/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -309,15 +301,20 @@ E   7    9   F    A   5
   
 <nav id="article-nav">
   
-    <a href="/2017/10/24/并发与并行/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/10/31/2-HBase源码分析-数据查询与Get/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          并发与并行
+          2 - HBase源码分析-数据查询与Get
         
       </div>
     </a>
   
+  
+    <a href="/2017/10/25/Java字节流与字符流/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java字节流与字符流</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 

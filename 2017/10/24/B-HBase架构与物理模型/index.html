@@ -6,19 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com/child">
-  <title>Unicode与UTF-8 | 张磊-博客</title>
+  <title>B - HBase架构与物理模型 | 张磊-博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="简单来说，Unicode：是ISO组织提出的UCS（Universal Multiple-Octet Coded Character Set），为所有字母和符号编码的字符集，即为每一个字符分配一个唯一的“ID”（学名码位，Code point）；UTF-8：为解决Unicode在网络上传输的问题，面向传输的众多UTF（UCS Transfer Format）标准出现了，它是一种编码规则，每次传输8">
-<meta name="keywords" content="编程基础">
+  <meta name="description" content="HBase可在大规模廉价的PC机器上搭建集群，其利用Hadoop的HDFS作为底层文件存储系统，利用MapReduce进行海量数据的分析，并使用ZooKeeper作为协同服务。">
+<meta name="keywords" content="HBase">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Unicode与UTF-8">
-<meta property="og:url" content="http://yoursite.com/child/2017/10/21/Unicode与UTF-8/index.html">
+<meta property="og:title" content="B - HBase架构与物理模型">
+<meta property="og:url" content="http://yoursite.com/child/2017/10/24/B-HBase架构与物理模型/index.html">
 <meta property="og:site_name" content="张磊-博客">
-<meta property="og:description" content="简单来说，Unicode：是ISO组织提出的UCS（Universal Multiple-Octet Coded Character Set），为所有字母和符号编码的字符集，即为每一个字符分配一个唯一的“ID”（学名码位，Code point）；UTF-8：为解决Unicode在网络上传输的问题，面向传输的众多UTF（UCS Transfer Format）标准出现了，它是一种编码规则，每次传输8">
-<meta property="og:updated_time" content="2017-10-25T09:06:34.216Z">
+<meta property="og:description" content="HBase可在大规模廉价的PC机器上搭建集群，其利用Hadoop的HDFS作为底层文件存储系统，利用MapReduce进行海量数据的分析，并使用ZooKeeper作为协同服务。">
+<meta property="og:image" content="http://oybpgm6jn.bkt.clouddn.com/image/hexoBlog/HBase%E6%9E%B6%E6%9E%84%E5%9B%BE.png">
+<meta property="og:image" content="http://oybpgm6jn.bkt.clouddn.com/HBase%E7%89%A9%E7%90%86%E6%A8%A1%E5%9E%8B.jpg">
+<meta property="og:updated_time" content="2018-01-22T14:38:36.319Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Unicode与UTF-8">
-<meta name="twitter:description" content="简单来说，Unicode：是ISO组织提出的UCS（Universal Multiple-Octet Coded Character Set），为所有字母和符号编码的字符集，即为每一个字符分配一个唯一的“ID”（学名码位，Code point）；UTF-8：为解决Unicode在网络上传输的问题，面向传输的众多UTF（UCS Transfer Format）标准出现了，它是一种编码规则，每次传输8">
+<meta name="twitter:title" content="B - HBase架构与物理模型">
+<meta name="twitter:description" content="HBase可在大规模廉价的PC机器上搭建集群，其利用Hadoop的HDFS作为底层文件存储系统，利用MapReduce进行海量数据的分析，并使用ZooKeeper作为协同服务。">
+<meta name="twitter:image" content="http://oybpgm6jn.bkt.clouddn.com/image/hexoBlog/HBase%E6%9E%B6%E6%9E%84%E5%9B%BE.png">
   
     <link rel="alternative" href="/atom.xml" title="张磊-博客" type="application/atom+xml">
   
@@ -158,43 +161,46 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Unicode与UTF-8" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-B-HBase架构与物理模型" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Unicode与UTF-8
+      B - HBase架构与物理模型
     </h1>
   
 
         
-        <a href="/2017/10/21/Unicode与UTF-8/" class="archive-article-date">
-  	<time datetime="2017-10-21T11:31:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-21</time>
+        <a href="/2017/10/24/B-HBase架构与物理模型/" class="archive-article-date">
+  	<time datetime="2017-10-24T11:24:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-24</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>简单来说，<br><strong>Unicode</strong>：是ISO组织提出的UCS（Universal Multiple-Octet Coded Character Set），为所有字母和符号编码的字符集，即为每一个字符分配一个唯一的“ID”（学名码位，Code point）；<br><strong>UTF-8</strong>：为解决Unicode在网络上传输的问题，面向传输的众多UTF（UCS Transfer Format）标准出现了，它是一种编码规则，每次传输8个位数据。<a id="more"></a></p>
-<p>Unicode其实也是一种对ASCII编码（只包括英文字母、数字和一些字符）的扩展，如同GBK编码一般。Unicode采用两个字节，也就是16位来统一表示所有的字符。对于ASCII编码里的一个字节的“半角”字符，Unicode保持其编码不变，只是将长度由原来的8位扩展为16位（高8位添加0），因此这种方案在保存纯英文文本时会多浪费一倍的空间。</p>
-<p>UTF-8是为传输而设计的编码规则，它是一种变长的编码方式，使用1~4个字节来表示一个字符，根据不同的字符而变化字节长度。当字符在ASCII码的范围时，就用一个字节表示。Unicode中一个中文字符占2个字节，而UTF-8中一个中文字符占3个字节。Unicode到UTF-8不是直接的对应，需要一些算法和规则来转换。</p>
-<p>编码规则如下：</p>
-<pre><code>Unicode                  UTF-8
-U+ 0000 ~ U+ 007F：    0xxxxxxx
-U+ 0080 ~ U+ 07FF：    110xxxxx 10xxxxxx
-U+ 0800 ~ U+ FFFF：    1110xxxx 10xxxxxx 10xxxxxx
-U+ 10000 ~ U+ 1FFFF：  11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
-</code></pre><p>例如：“知”的码位是U+77E5，那么它的UTF-8编码字节序列为？</p>
-<pre><code>    7     7     E     5
-    0111  0111  1110  0101
-    0111   011111   100101（二进制的77E5）
-1110xxxx 10xxxxxx 10xxxxxx（模板，第三行）
-11100111 10011111 10100101（带入模板）
-E   7    9   F    A   5
-</code></pre><p>故“知”的UTF-8的编码字节序列为：E79FA5(3个字节表示一个中文字符)</p>
+        <p>HBase可在大规模廉价的PC机器上搭建集群，其利用Hadoop的HDFS作为底层文件存储系统，利用MapReduce进行海量数据的分析，并使用ZooKeeper作为协同服务。<a id="more"></a></p>
+<p><img src="http://oybpgm6jn.bkt.clouddn.com/image/hexoBlog/HBase%E6%9E%B6%E6%9E%84%E5%9B%BE.png" alt="HBase架构图"></p>
+<p>1、HBase整体架构</p>
+<p>Client：客户端，是HBase的入口，使用HBase的RPC机制与HMaster和HRegionServer进行通信。与HMaster进行通信，负责管理类的操作；与HRegionServer进行通信，负责数据读写类操作。</p>
+<p>ZooKeeper：分布式应用程序协调服务组件，负责管理多个HMaster的选举、存储HBase元数据信息（HMaster启动时将系统表-ROOT-加载到zk）、实时监控HRegionServer状态信息、存储所有Region的寻址入口等。</p>
+<p>HMaster：主节点，可以在启动HBase时设置为“启动多个”，但会通过选举机制保证只有一个用于提供服务。其主要负责管理Table的CRUD操作，管理RegionServer的负载均衡，Region的重分配及迁移等。</p>
+<p>HRegionServer：主要负责用户的I/O请求，向HDFS（Hadoop的分布式文件系统）中读写数据（HBase底层数据存储依靠于HDFS）。其包含一个HLog（实现Write ahead log，用户每次写入操作前，会写一份数据到HLog文件中）和多个HRegion。当前，每个HRegionServer可以管理大约100~1000个HRegion，每个HRegion大小为1~20GB。</p>
+<p>HRegion：存储的是实际数据，由一个或者多个HStore组成。每个table最开始只有一个HRegion，随着HRegion不断增大，当增大到一个阈值时，分割为两个新的HRegion。最后一个table会按行分割为多个HRegion，每个HRegion分散在不同的HregionServer中。HRegion是分布式存储和负载的最小单元（注意，不是存储的最小单元），即一个HRegion不会拆分到多个Server上。</p>
+<p>HStore：每个HStore保存了Table中的一个ColumnFamily（列族，即将经常同时访问的字段放在一起）的存储。每个HStore包含了一个MemStore和至少一个StoreFile。MemStore是Sorted Memory Buffer，用户写入数据时会首先放入MemStore中，当它满了以后，会缓冲（flush）成一个StoreFile。</p>
+<p>StoreFile：包含一个或者多个HFile，存在着Compact（合并）与Split（分裂）操作。</p>
+<p>HFile：结构分为6部分，主要包括，</p>
+<blockquote>
+<p>[a] Data Block: 存储表中的数据，该部分数据可以被压缩。Data block是由多个block组成，每个block的组成形式为“块头+key长度+value长度+key+value”。块的大小可以设置，默认是64KB。如果设置较大，利于scan；设置较小，利于随机查询。<br>[b] Meta Block（optional）：元数据块，用于保存元数据是kv类型的值。（注意，该数据块中只保存value值，key的值保存在第五项）。<br>[c] FileInfo：HFile的元信息，保存的数据是以key值排序的kv类型的值。<br>[d] DataIndex：Data block的索引，保存的是每个数据块在HFile中的位置、大小以及每个块的第一条key，即被索引的block中第一条记录的key。<br>[e] MetaBlock Index：Meta block的索引，保存的是每个元数据在HFile中的位置、大小及每个元数据的key值。<br>[f] Trailer Block：保存了HFile的一些基本信息，比如FileInfo的偏移、DataIndex块的个数等。</p>
+</blockquote>
+<p>2、HBase表物理模型</p>
+<p><img src="http://oybpgm6jn.bkt.clouddn.com/HBase%E7%89%A9%E7%90%86%E6%A8%A1%E5%9E%8B.jpg" alt="HBase表物理模型"></p>
+<p>HBase表的特征之一：多维有序映射。</p>
+<blockquote>
+<p>RowKey -&gt; 某一行数据;<br>Family -&gt; 某行数据中的某个列族；<br>Qualifier -&gt; 某行数据中某个列族的某一列；<br>Timestamp -&gt; 某行数据中某个列族的某一列（单元格数据）的某一个版本</p>
+</blockquote>
 
       
 
@@ -239,7 +245,7 @@ E   7    9   F    A   5
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程基础</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">HBase</a>
         		</li>
       		
 		</ul>
@@ -295,7 +301,7 @@ E   7    9   F    A   5
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/child/2017/10/21/Unicode与UTF-8/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/child/2017/10/24/B-HBase架构与物理模型/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -309,15 +315,20 @@ E   7    9   F    A   5
   
 <nav id="article-nav">
   
-    <a href="/2017/10/24/并发与并行/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/10/25/Java字节流与字符流/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          并发与并行
+          Java字节流与字符流
         
       </div>
     </a>
   
+  
+    <a href="/2017/10/24/A-HBase概念/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">A - HBase概念</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 

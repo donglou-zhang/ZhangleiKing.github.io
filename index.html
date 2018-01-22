@@ -309,19 +309,19 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-1-HBase源码分析-数据查询与Get" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-2-HBase源码分析-数据查询与Get" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/31/1-HBase源码分析-数据查询与Get/">1 - HBase源码分析-数据查询与Get</a>
+      <a class="article-title" href="/2017/10/31/2-HBase源码分析-数据查询与Get/">2 - HBase源码分析-数据查询与Get</a>
     </h1>
   
 
         
-        <a href="/2017/10/31/1-HBase源码分析-数据查询与Get/" class="archive-article-date">
+        <a href="/2017/10/31/2-HBase源码分析-数据查询与Get/" class="archive-article-date">
   	<time datetime="2017-10-31T13:42:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-31</time>
 </a>
         
@@ -329,8 +329,7 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Get-单行数据获取"><a href="#Get-单行数据获取" class="headerlink" title="Get-单行数据获取"></a>Get-单行数据获取</h1><hr>
-<p>使用这种方法用于从hbase中获取单行数据：
+        <p>使用这种方法用于从hbase中获取单行数据：
 　　</p>
 <pre><code>Result get(Get get) throws IOException
 </code></pre><p>首先我们来看下Result的结构，
@@ -342,7 +341,7 @@ var _hmt = _hmt || [];
 }
 </code></pre><p>Result用于存储Get或者Scan操作后返回的表的单行值，使用Result可以直接获取值或者各种Map结构（Key-Value对），例如：
         
-          <a class="article-more-a" href="/2017/10/31/1-HBase源码分析-数据查询与Get/#more">more >></a>
+          <a class="article-more-a" href="/2017/10/31/2-HBase源码分析-数据查询与Get/#more">more >></a>
         
       
 
@@ -360,7 +359,7 @@ var _hmt = _hmt || [];
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hbase源码分析</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hbase源码分析系列</a>
         		</li>
       		
 		</ul>
@@ -370,7 +369,87 @@ var _hmt = _hmt || [];
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/31/1-HBase源码分析-数据查询与Get/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/10/31/2-HBase源码分析-数据查询与Get/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-1-HBase源码分析-基本情况" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/28/1-HBase源码分析-基本情况/">1 - HBase源码分析-基本情况</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/28/1-HBase源码分析-基本情况/" class="archive-article-date">
+  	<time datetime="2017-10-28T03:21:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>从本节起，将开启HBase的源码分析系列，分析的内容主要包括但不限于以下：<br>
+        
+          <a class="article-more-a" href="/2017/10/28/1-HBase源码分析-基本情况/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">HBase</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hbase源码分析系列</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/28/1-HBase源码分析-基本情况/">展开全文 >></a>
         </p>
       
 
@@ -477,19 +556,19 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-A-HBase概念与架构" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-B-HBase架构与物理模型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/24/A-HBase概念与架构/">A - HBase概念与架构</a>
+      <a class="article-title" href="/2017/10/24/B-HBase架构与物理模型/">B - HBase架构与物理模型</a>
     </h1>
   
 
         
-        <a href="/2017/10/24/A-HBase概念与架构/" class="archive-article-date">
+        <a href="/2017/10/24/B-HBase架构与物理模型/" class="archive-article-date">
   	<time datetime="2017-10-24T11:24:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-24</time>
 </a>
         
@@ -497,9 +576,9 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>HBase是一个典型的NoSQL（Not Only SQL）数据库，主要用于存储半结构化和非结构化的松散数据（因为在HBase中，为空的列是不占用存储空间的）。HBase的单表可以有百亿行，百万列，且其依靠横向扩展（增加服务器）来增加计算和存储能力，弹性扩展（可以在不停止现有服务的前提下，随时添加或者减少节点）。
+        <p>HBase可在大规模廉价的PC机器上搭建集群，其利用Hadoop的HDFS作为底层文件存储系统，利用MapReduce进行海量数据的分析，并使用ZooKeeper作为协同服务。
         
-          <a class="article-more-a" href="/2017/10/24/A-HBase概念与架构/#more">more >></a>
+          <a class="article-more-a" href="/2017/10/24/B-HBase架构与物理模型/#more">more >></a>
         
       
 
@@ -523,7 +602,83 @@ var _hmt = _hmt || [];
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/24/A-HBase概念与架构/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/10/24/B-HBase架构与物理模型/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-A-HBase概念" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/24/A-HBase概念/">A - HBase概念</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/24/A-HBase概念/" class="archive-article-date">
+  	<time datetime="2017-10-24T11:24:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>HBase是一个典型的NoSQL（Not Only SQL）数据库，主要用于存储半结构化和非结构化的松散数据（因为在HBase中，为空的列是不占用存储空间的）。HBase的单表可以有百亿行，百万列，且其依靠横向扩展（增加服务器）来增加计算和存储能力，弹性扩展（可以在不停止现有服务的前提下，随时添加或者减少节点）。
+        
+          <a class="article-more-a" href="/2017/10/24/A-HBase概念/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">HBase</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/24/A-HBase概念/">展开全文 >></a>
         </p>
       
 
@@ -800,11 +955,11 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
+                <a href="javascript:void(0)" class="js-tag color1">HBase</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">HBase</a>
+                <a href="javascript:void(0)" class="js-tag color2">Hbase源码分析系列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -816,7 +971,7 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hbase源码分析</a>
+                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
             
             <div class="clearfix"></div>
