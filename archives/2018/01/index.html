@@ -6,19 +6,14 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com/child">
-  <title>Unicode与UTF-8 | 张磊-博客</title>
+  <title>Archives: 2018/1 | 张磊-博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="简单来说，Unicode：是ISO组织提出的UCS（Universal Multiple-Octet Coded Character Set），为所有字母和符号编码的字符集，即为每一个字符分配一个唯一的“ID”（学名码位，Code point）；UTF-8：为解决Unicode在网络上传输的问题，面向传输的众多UTF（UCS Transfer Format）标准出现了，它是一种编码规则，每次传输8">
-<meta name="keywords" content="编程基础">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Unicode与UTF-8">
-<meta property="og:url" content="http://yoursite.com/child/2017/10/21/Unicode与UTF-8/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="张磊-博客">
+<meta property="og:url" content="http://yoursite.com/child/archives/2018/01/index.html">
 <meta property="og:site_name" content="张磊-博客">
-<meta property="og:description" content="简单来说，Unicode：是ISO组织提出的UCS（Universal Multiple-Octet Coded Character Set），为所有字母和符号编码的字符集，即为每一个字符分配一个唯一的“ID”（学名码位，Code point）；UTF-8：为解决Unicode在网络上传输的问题，面向传输的众多UTF（UCS Transfer Format）标准出现了，它是一种编码规则，每次传输8">
-<meta property="og:updated_time" content="2017-10-25T09:06:34.216Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Unicode与UTF-8">
-<meta name="twitter:description" content="简单来说，Unicode：是ISO组织提出的UCS（Universal Multiple-Octet Coded Character Set），为所有字母和符号编码的字符集，即为每一个字符分配一个唯一的“ID”（学名码位，Code point）；UTF-8：为解决Unicode在网络上传输的问题，面向传输的众多UTF（UCS Transfer Format）标准出现了，它是一种编码规则，每次传输8">
+<meta name="twitter:title" content="张磊-博客">
   
     <link rel="alternative" href="/atom.xml" title="张磊-博客" type="application/atom+xml">
   
@@ -158,197 +153,60 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Unicode与UTF-8" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      Unicode与UTF-8
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2018/01/22/分布式文件系统/" class="archive-article-date">
+  	<time datetime="2018-01-22T07:12:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-22</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/01/22/分布式文件系统/">分布式文件系统</a>
     </h1>
   
 
-        
-        <a href="/2017/10/21/Unicode与UTF-8/" class="archive-article-date">
-  	<time datetime="2017-10-21T11:31:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>简单来说，<br><strong>Unicode</strong>：是ISO组织提出的UCS（Universal Multiple-Octet Coded Character Set），为所有字母和符号编码的字符集，即为每一个字符分配一个唯一的“ID”（学名码位，Code point）；<br><strong>UTF-8</strong>：为解决Unicode在网络上传输的问题，面向传输的众多UTF（UCS Transfer Format）标准出现了，它是一种编码规则，每次传输8个位数据。<a id="more"></a></p>
-<p>Unicode其实也是一种对ASCII编码（只包括英文字母、数字和一些字符）的扩展，如同GBK编码一般。Unicode采用两个字节，也就是16位来统一表示所有的字符。对于ASCII编码里的一个字节的“半角”字符，Unicode保持其编码不变，只是将长度由原来的8位扩展为16位（高8位添加0），因此这种方案在保存纯英文文本时会多浪费一倍的空间。</p>
-<p>UTF-8是为传输而设计的编码规则，它是一种变长的编码方式，使用1~4个字节来表示一个字符，根据不同的字符而变化字节长度。当字符在ASCII码的范围时，就用一个字节表示。Unicode中一个中文字符占2个字节，而UTF-8中一个中文字符占3个字节。Unicode到UTF-8不是直接的对应，需要一些算法和规则来转换。</p>
-<p>编码规则如下：</p>
-<pre><code>Unicode                  UTF-8
-U+ 0000 ~ U+ 007F：    0xxxxxxx
-U+ 0080 ~ U+ 07FF：    110xxxxx 10xxxxxx
-U+ 0800 ~ U+ FFFF：    1110xxxx 10xxxxxx 10xxxxxx
-U+ 10000 ~ U+ 1FFFF：  11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
-</code></pre><p>例如：“知”的码位是U+77E5，那么它的UTF-8编码字节序列为？</p>
-<pre><code>    7     7     E     5
-    0111  0111  1110  0101
-    0111   011111   100101（二进制的77E5）
-1110xxxx 10xxxxxx 10xxxxxx（模板，第三行）
-11100111 10011111 10100101（带入模板）
-E   7    9   F    A   5
-</code></pre><p>故“知”的UTF-8的编码字节序列为：E79FA5(3个字节表示一个中文字符)</p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/img/ali-receive.jpg">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/img/wechat-receive.png">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程基础</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分布式</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/child/2017/10/21/Unicode与UTF-8/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2017/10/24/并发与并行/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          并发与并行
-        
-      </div>
-    </a>
   
   
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -371,8 +229,8 @@ E   7    9   F    A   5
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

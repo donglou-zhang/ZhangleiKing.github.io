@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com/child">
-  <title>Unicode与UTF-8 | 张磊-博客</title>
+  <title>分布式文件系统 | 张磊-博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="简单来说，Unicode：是ISO组织提出的UCS（Universal Multiple-Octet Coded Character Set），为所有字母和符号编码的字符集，即为每一个字符分配一个唯一的“ID”（学名码位，Code point）；UTF-8：为解决Unicode在网络上传输的问题，面向传输的众多UTF（UCS Transfer Format）标准出现了，它是一种编码规则，每次传输8">
-<meta name="keywords" content="编程基础">
+  <meta name="description" content="分布式文件系统的主要功能有两个：一，存储文档、图像、视频等Blob（Binary large object）类型数据；二，作为分布式表格系统的持久化层 分布式文件系统中，最著名的是Google的GFS和Hadoop的HDFS，因此下文中主要以这二者为例，采用QA的方式。">
+<meta name="keywords" content="分布式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Unicode与UTF-8">
-<meta property="og:url" content="http://yoursite.com/child/2017/10/21/Unicode与UTF-8/index.html">
+<meta property="og:title" content="分布式文件系统">
+<meta property="og:url" content="http://yoursite.com/child/2018/01/22/分布式文件系统/index.html">
 <meta property="og:site_name" content="张磊-博客">
-<meta property="og:description" content="简单来说，Unicode：是ISO组织提出的UCS（Universal Multiple-Octet Coded Character Set），为所有字母和符号编码的字符集，即为每一个字符分配一个唯一的“ID”（学名码位，Code point）；UTF-8：为解决Unicode在网络上传输的问题，面向传输的众多UTF（UCS Transfer Format）标准出现了，它是一种编码规则，每次传输8">
-<meta property="og:updated_time" content="2017-10-25T09:06:34.216Z">
+<meta property="og:description" content="分布式文件系统的主要功能有两个：一，存储文档、图像、视频等Blob（Binary large object）类型数据；二，作为分布式表格系统的持久化层 分布式文件系统中，最著名的是Google的GFS和Hadoop的HDFS，因此下文中主要以这二者为例，采用QA的方式。">
+<meta property="og:updated_time" content="2018-01-22T10:49:56.738Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Unicode与UTF-8">
-<meta name="twitter:description" content="简单来说，Unicode：是ISO组织提出的UCS（Universal Multiple-Octet Coded Character Set），为所有字母和符号编码的字符集，即为每一个字符分配一个唯一的“ID”（学名码位，Code point）；UTF-8：为解决Unicode在网络上传输的问题，面向传输的众多UTF（UCS Transfer Format）标准出现了，它是一种编码规则，每次传输8">
+<meta name="twitter:title" content="分布式文件系统">
+<meta name="twitter:description" content="分布式文件系统的主要功能有两个：一，存储文档、图像、视频等Blob（Binary large object）类型数据；二，作为分布式表格系统的持久化层 分布式文件系统中，最著名的是Google的GFS和Hadoop的HDFS，因此下文中主要以这二者为例，采用QA的方式。">
   
     <link rel="alternative" href="/atom.xml" title="张磊-博客" type="application/atom+xml">
   
@@ -158,43 +158,71 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Unicode与UTF-8" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-分布式文件系统" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Unicode与UTF-8
+      分布式文件系统
     </h1>
   
 
         
-        <a href="/2017/10/21/Unicode与UTF-8/" class="archive-article-date">
-  	<time datetime="2017-10-21T11:31:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-21</time>
+        <a href="/2018/01/22/分布式文件系统/" class="archive-article-date">
+  	<time datetime="2018-01-22T07:12:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-22</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>简单来说，<br><strong>Unicode</strong>：是ISO组织提出的UCS（Universal Multiple-Octet Coded Character Set），为所有字母和符号编码的字符集，即为每一个字符分配一个唯一的“ID”（学名码位，Code point）；<br><strong>UTF-8</strong>：为解决Unicode在网络上传输的问题，面向传输的众多UTF（UCS Transfer Format）标准出现了，它是一种编码规则，每次传输8个位数据。<a id="more"></a></p>
-<p>Unicode其实也是一种对ASCII编码（只包括英文字母、数字和一些字符）的扩展，如同GBK编码一般。Unicode采用两个字节，也就是16位来统一表示所有的字符。对于ASCII编码里的一个字节的“半角”字符，Unicode保持其编码不变，只是将长度由原来的8位扩展为16位（高8位添加0），因此这种方案在保存纯英文文本时会多浪费一倍的空间。</p>
-<p>UTF-8是为传输而设计的编码规则，它是一种变长的编码方式，使用1~4个字节来表示一个字符，根据不同的字符而变化字节长度。当字符在ASCII码的范围时，就用一个字节表示。Unicode中一个中文字符占2个字节，而UTF-8中一个中文字符占3个字节。Unicode到UTF-8不是直接的对应，需要一些算法和规则来转换。</p>
-<p>编码规则如下：</p>
-<pre><code>Unicode                  UTF-8
-U+ 0000 ~ U+ 007F：    0xxxxxxx
-U+ 0080 ~ U+ 07FF：    110xxxxx 10xxxxxx
-U+ 0800 ~ U+ FFFF：    1110xxxx 10xxxxxx 10xxxxxx
-U+ 10000 ~ U+ 1FFFF：  11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
-</code></pre><p>例如：“知”的码位是U+77E5，那么它的UTF-8编码字节序列为？</p>
-<pre><code>    7     7     E     5
-    0111  0111  1110  0101
-    0111   011111   100101（二进制的77E5）
-1110xxxx 10xxxxxx 10xxxxxx（模板，第三行）
-11100111 10011111 10100101（带入模板）
-E   7    9   F    A   5
-</code></pre><p>故“知”的UTF-8的编码字节序列为：E79FA5(3个字节表示一个中文字符)</p>
+        <p>分布式文件系统的主要功能有两个：<br>一，存储文档、图像、视频等Blob（Binary large object）类型数据；二，作为分布式表格系统的持久化层</p>
+<p>分布式文件系统中，最著名的是Google的GFS和Hadoop的HDFS，因此下文中主要以这二者为例，采用QA的方式。<a id="more"></a></p>
+<h2 id="1-GFS整体结构是怎样，其中角色各自承担的任务？"><a href="#1-GFS整体结构是怎样，其中角色各自承担的任务？" class="headerlink" title="1.GFS整体结构是怎样，其中角色各自承担的任务？"></a>1.GFS整体结构是怎样，其中角色各自承担的任务？</h2><p>GFS（HDFS的整体结构和GFS几乎一致）主要有以下三种角色：</p>
+<blockquote>
+<p>a) Master（主控服务器）：负责维护系统的元数据，包括文件及数据块命名空间、文件到数据块的映射（一个文件可能会被切割成多个数据块，当读取某一文件时，需要知道文件由哪些数据块组成）、数据块位置信息等；同时也负责系统的全局控制，如数据块回收、数据块复制等；另外，也负责与数据块服务器的心跳等。</p>
+</blockquote>
+<p>Master在对文件划分为数据块时，会为每个数据块创建一个64位全局唯一的句柄。</p>
+<blockquote>
+<p>b) ChunkServer（数据块服务器）：主要用于存储数据块，以Linux文件的形式将数据块存储在磁盘中</p>
+</blockquote>
+<p>ChunkServer会对存储的数据维持校验和。</p>
+<blockquote>
+<p>c) Client（客户端）：提供给应用程序访问接口。</p>
+</blockquote>
+<p>GFS Client不缓存文件数据，只缓存主控服务器中获取的元数据。</p>
+<h2 id="2-GFS和HDFS的数据块为什么划分成64M？"><a href="#2-GFS和HDFS的数据块为什么划分成64M？" class="headerlink" title="2.GFS和HDFS的数据块为什么划分成64M？"></a>2.GFS和HDFS的数据块为什么划分成64M？</h2><p>64M的数据块，确实远远大于一般的文件系统的数据块大小，但是选择一个大的数据块，能提供很多好处：</p>
+<blockquote>
+<p>a) 减少了Client与Master的交互：在同一个数据块内的读写操作只需要client在开始阶段询问master一次关于数据块位置信息即可，尤其是对于顺序读写超大文件，效果非常显著。</p>
+<p>b) 减小网络负载：使用一个大的数据块，client可以在一个数据块上完成更多的操作，它可以通过维持一个到数据块服务器的TCP长连接，减少网络管理量。</p>
+<p>c) 减少元数据的存储：数据块越大，对于同一个文件而言，其需要保存的元数据就越少。这样，当元数据较少时，我们可以将其存储在内存里，可以带来其他好处。</p>
+<p>缺陷：文件较小时，其会被保存在一个数据块里。这样，当大量对该文件的请求到来时，很容易出现热点问题（系统局部过载）。当然，对于该问题，可以采用增加冗余份数等策略。</p>
+</blockquote>
+<h2 id="3-HDFS如何删除多余副本数据？"><a href="#3-HDFS如何删除多余副本数据？" class="headerlink" title="3.HDFS如何删除多余副本数据？"></a>3.HDFS如何删除多余副本数据？</h2><p>如果系统的设置是标准的3副本策略，但发生某些情况后，系统中的A数据副本变成了5份，那么系统需要对多余的2份数据进行清除动作。</p>
+<p>[1] 哪些情况会导致系统中产生多余的副本？</p>
+<blockquote>
+<p>a) 节点重新上线：如果一个数据块节点下线，会导致大批量的数据块丢失，而这些数据块就会在整个系统中进行重新拷贝。但是，一旦下线的节点取消下线，则之前已经拷贝生成的数据必然会成为多余的数据副本；</p>
+<p>b) 副本数重新设置：如果系统当前的副本数设置为3，那么A数据就会存在3份副本；当某一用户通过API设置副本数为1时，则系统中A副本就会多出2份；</p>
+<p>c) 新添加的数据块记录丢失</p>
+</blockquote>
+<p>[2] 如何处理多余的副本？</p>
+<ul>
+<li>定位多余的副本</li>
+</ul>
+<blockquote>
+<p>对于数据副本块，找到其所在的节点列表；</p>
+<p>对于该数据块的节点列表，划分为2类：节点上拥有超过1个副本和节点上恰好只有1个副本。优先选择节点中多于1个副本的节点进行多于副本删除；（例如X1节点有2个副本，X2节点有2个副本，X3节点有1个副本，则肯定先选择X1或者X2节点进行多于副本删除）</p>
+<p>对于节点上副本数相同的，则优先选取可用空间少的节点。(例如X1节点有1个副本(10G可用空间)，X2节点有1个副本（100G可用空间），X3节点有1个副本（2G可用空间），X4节点有1个副本（23G可用空间），则肯定先选择X3节点进行多于副本删除，因为删除后可以释放出更多的可用空间)</p>
+<p>将挑选出的节点从候选节点列表中删除</p>
+</blockquote>
+<ul>
+<li>处理多余的副本</li>
+</ul>
+<blockquote>
+<p>已经获取到需要删除的副本和其对应所在的节点信息，只需要将其加入到无效数据块列表后，不久该数据块将会被清除</p>
+</blockquote>
 
       
 
@@ -239,7 +267,7 @@ E   7    9   F    A   5
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程基础</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分布式</a>
         		</li>
       		
 		</ul>
@@ -295,7 +323,7 @@ E   7    9   F    A   5
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/child/2017/10/21/Unicode与UTF-8/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/child/2018/01/22/分布式文件系统/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -309,15 +337,11 @@ E   7    9   F    A   5
   
 <nav id="article-nav">
   
-    <a href="/2017/10/24/并发与并行/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          并发与并行
-        
-      </div>
-    </a>
   
+    <a href="/2017/12/25/分布式一致性/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">分布式一致性</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
